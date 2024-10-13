@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "StockTrades",
+    "type": "object",
+    "properties": {
+      "open": {
+        "type": "number",
+        "description": "Opening price for the stock at the start of the minute"
+      },
+      "high": {
+        "type": "number",
+        "description": "Highest price the stock reached during the minute"
+      },
+      "low": {
+        "type": "number",
+        "description": "Lowest price the stock reached during the minute"
+      },
+      "close": {
+        "type": "number",
+        "description": "Closing price for the stock at the end of the minute"
+      },
+      "volume": {
+        "type": "integer",
+        "description": "Number of shares sold in this minute"
+      },
+      "timestamp": {
+        "type": "integer",
+        "description": "Timestamp for the stock trading data, formatted as seconds-since-epoch"
+      },
+      "datetime": {
+        "type": "string",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$",
+        "description": "Timestamp for the stock trading data, formatted as 'YYYY-MM-DD HH:MM:SS.sss'."
+      },
+      "stock": {
+        "type": "string",
+        "description": "Short code for the stock (e.g. 'IBM')"
+      }
+    },
+    "required": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "timestamp",
+      "datetime",
+      "stock"
+    ],
+    "additionalProperties": false
+}

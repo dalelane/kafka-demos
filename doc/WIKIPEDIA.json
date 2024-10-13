@@ -1,0 +1,23 @@
+{
+    "type": "kafka",
+    "name": "Wikipedia updates",
+    "alias": "WIKIPEDIA",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Events about edits made to the English Wikipedia",
+    "tags": [
+        "wikipedia",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"type\": \"edit\",\n    \"title\": \"Republic of Ireland national football team\",\n    \"user\": \"Supersaints2014\",\n    \"userid\": 20381428,\n    \"timestamp\": 1728855378000\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n    \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n    \"title\": \"WikipediaEdits\",\n    \"type\": \"object\",\n    \"properties\": {\n      \"type\": {\n        \"type\": \"string\",\n        \"enum\": [\"edit\", \"new\"],\n        \"description\": \"whether the event represents the creation of a new page, or the edit of an existing page\"\n      },\n      \"title\": {\n        \"type\": \"string\",\n        \"description\": \"title of the page that has been updated\"\n      },\n      \"user\": {\n        \"type\": \"string\",\n        \"description\": \"name of the user that made the update. If they were anonymous, this will contain their IP address (which can be IPv4 or IPv6)\"\n      },\n      \"userid\": {\n        \"type\": \"integer\",\n        \"minimum\": 0,\n        \"description\": \"ID of the user that made the update. If they were anonymous, it will be 0\"\n      },\n      \"timestamp\": {\n        \"type\": \"integer\"\n      }\n    },\n    \"required\": [\"type\", \"title\", \"timestamp\"],\n    \"additionalProperties\": false\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "WIKIPEDIA"
+    }
+}

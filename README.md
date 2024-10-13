@@ -84,6 +84,14 @@ To demonstrate:
 To demonstrate:
 - verify Kafka messages on Event Streams on the `STOCKTRADES.IBM`, `STOCKTRADES.MICROSOFT`, `STOCKTRADES.SALESFORCE`, `STOCKTRADES.GOOGLE` topics
 
+To add the topics to Event Endpoint Management:
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.IBM
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.MICROSOFT
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.SALESFORCE
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.GOOGLE
+```
+
 
 ### Wikipedia edits
 
@@ -98,6 +106,11 @@ To demonstrate:
 
 To demonstrate:
 - verify Kafka messages on Event Streams on the `WIKIPEDIA` topic
+
+To add the topic to Event Endpoint Management:
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  WIKIPEDIA
+```
 
 
 ### PostgreSQL updates
@@ -140,6 +153,12 @@ To demonstrate:
 
 To demonstrate:
 - verify Kafka messages on Event Streams on the `WEATHER.HURSLEY`, `WEATHER.ARMONK` topics
+
+To add the topics to Event Endpoint Management:
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  WEATHER.HURSLEY
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  WEATHER.ARMONK
+```
 
 
 ### JDBC sink

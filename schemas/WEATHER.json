@@ -1,0 +1,200 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "WeatherStationData",
+    "type": "object",
+    "properties": {
+      "coord": {
+        "type": "object",
+        "properties": {
+          "lon": {
+            "type": "number",
+            "description": "longitude for the weather station that reported the data"
+          },
+          "lat": {
+            "type": "number",
+            "description": "latitude for the weather station that reported the data"
+          }
+        },
+        "required": [
+          "lon",
+          "lat"
+        ]
+      },
+      "weather": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "code for the classification of the weather data (e.g. 802 = 'scattered clouds') - see https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 for the list of codes"
+              },
+              "main": {
+                "type": "string",
+                "description": "short description for the classification of the weather data (e.g. 'Clouds') - see https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 for the list of classifications"
+              },
+              "description": {
+                "type": "string",
+                "description": "summary of the classification of the weather data (e.g. 'scattered clouds: 25-50%') - see https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 for the list of classifications"
+              },
+              "icon": {
+                "type": "string",
+                "description": "ID of an icon suitable for displaying on a weather map - see https://openweathermap.org/weather-conditions#Icon-list for a list of icons"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "base": {
+        "type": "string",
+        "description": "description of the source of the weather data"
+      },
+      "main": {
+        "type": "object",
+        "properties": {
+          "temp": {
+            "type": "number",
+            "description": "temperature reading, in degrees Celsius"
+          },
+          "feels_like": {
+            "type": "number",
+            "description": "Temperature. This temperature parameter accounts for the human perception of weather. Unit - degrees Celsius"
+          },
+          "temp_min": {
+            "type": "number",
+            "description": "Minimum temperature at the moment. This is minimal currently observed temperature. Degrees Celsius."
+          },
+          "temp_max": {
+            "type": "number",
+            "description": "Maximum temperature at the moment. This is maximal currently observed temperature. Degrees Celsius."
+          },
+          "pressure": {
+            "type": "integer",
+            "description": "Atmospheric pressure on the sea level, hPa"
+          },
+          "humidity": {
+            "type": "integer",
+            "description": "Humidity as a percentage"
+          },
+          "sea_level": {
+            "type": "integer",
+            "description": "Atmospheric pressure on the sea level, hPa"
+          },
+          "grnd_level": {
+            "type": "integer",
+            "description": "Atmospheric pressure on the ground level, hPa"
+          }
+        },
+        "required": [
+          "temp",
+          "feels_like",
+          "pressure",
+          "humidity"
+        ]
+      },
+      "visibility": {
+        "type": "integer",
+        "description": "Visibility, meter. The maximum value of the visibility is 10 km"
+      },
+      "wind": {
+        "type": "object",
+        "properties": {
+          "speed": {
+            "type": "number",
+            "description": "Wind speed in metres per second"
+          },
+          "deg": {
+            "type": "integer",
+            "description": "Wind direction, degrees (meteorological)"
+          },
+          "gust": {
+            "type": "number",
+            "description": "Wind gust in metres per second"
+          }
+        },
+        "required": [
+          "speed",
+          "deg"
+        ]
+      },
+      "clouds": {
+        "type": "object",
+        "properties": {
+          "all": {
+            "type": "integer",
+            "description": "Cloudiness as a percentage"
+          }
+        },
+        "required": [
+          "all"
+        ]
+      },
+      "dt": {
+        "type": "integer",
+        "description": "Time of data collection, as a unix timestamp in UTC"
+      },
+      "sys": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "description": "internal parameter"
+          },
+          "id": {
+            "type": "integer",
+            "description": "internal parameter"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code (e.g. 'GB')"
+          },
+          "sunrise": {
+            "type": "integer",
+            "description": "Time of sunrise at this location, as a unix timestamp in UTC"
+          },
+          "sunset": {
+            "type": "integer",
+            "description": "Time of sunset at this location, as a unix timestamp in UTC"
+          }
+        },
+        "required": [
+          "country"
+        ]
+      },
+      "timezone": {
+        "type": "integer",
+        "description": "the difference (in seconds) of this location from UTC"
+      },
+      "id": {
+        "type": "integer",
+        "description": "ID for the nearest city to this location, as returned by https://docs.openweather.co.uk/api/geocoding-api"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of the nearest city to this location, as returned by https://docs.openweather.co.uk/api/geocoding-api"
+      },
+      "cod": {
+        "type": "integer",
+        "description": "internal parameter"
+      }
+    },
+    "required": [
+      "coord",
+      "weather",
+      "base",
+      "main",
+      "visibility",
+      "wind",
+      "clouds",
+      "dt",
+      "sys",
+      "timezone",
+      "id",
+      "name",
+      "cod"
+    ]
+}
