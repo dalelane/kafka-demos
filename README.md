@@ -140,3 +140,35 @@ To demonstrate:
 
 To demonstrate:
 - verify Kafka messages on Event Streams on the `WEATHER.HURSLEY`, `WEATHER.ARMONK` topics
+
+
+### JDBC sink
+
+1. Create the PostgreSQL database
+    - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md#postgresql)
+2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` section in `.spec.externalConfiguration`, **and** the `pgsqldemo-cluster-cert` section in `.spec.tls`
+3. Apply the updated Kafka Connect spec
+    ```sh
+    oc apply -f kafka-connect.yaml
+    ```
+4. Create the topic
+    ```sh
+    oc apply -f pgsqljdbc-topic.yaml
+    ```
+5. Create the connector
+    ```sh
+    oc apply -f pgsqljdbc-connector.yaml
+    ```
+
+To verify, send Kafka JSON messages to the `pgsqljdbcsink` topic:
+```sh
+curl \
+    --silent -k \
+    -X POST \
+    -H "Content-Type: application/json" \
+    --data @pgsqljdbc-message.json \
+    -u kafka-demo-apps:$(oc get secret kafka-demo-apps -nevent-automation -ojsonpath='{.data.password}' | base64 -d) \
+    https://$(oc get eventstreams my-kafka-cluster -o jsonpath='{.status.routes.recapi-external}')/topics/pgsqljdbcsink/records > /dev/null
+```
+
+_Note: Enable the REST Producer on the Event Streams cluster by adding `restProducer: {}` to `spec`._

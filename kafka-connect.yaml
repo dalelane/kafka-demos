@@ -169,3 +169,11 @@ spec:
             group: org.apache.camel.kafkaconnector
             type: maven
             version: 0.11.5
+      # ---------------------------------------------------------------
+      # demo-set: jdbc
+      # ---------------------------------------------------------------
+      # JDBC sink connector - writing Kafka messages to a database
+      - name: jdbc
+        artifacts:
+          - type: zip
+            url: https://github.com/Aiven-Open/jdbc-connector-for-apache-kafka/releases/download/v6.10.0/jdbc-connector-for-apache-kafka-6.10.0.zip

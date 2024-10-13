@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------
+# PostgreSQL JDBC sink
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: pgsqljdbc-sink-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: io.aiven.connect.jdbc.JdbcSinkConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: true
+    # source
+    topics: pgsqljdbcsink
+    # connection info
+    connection.url: jdbc:postgresql://${file:/opt/kafka/external-configuration/connect-creds-postgresql:host}:${file:/opt/kafka/external-configuration/connect-creds-postgresql:pgbouncer-port}/${file:/opt/kafka/external-configuration/connect-creds-postgresql:dbname}
+    connection.user: ${file:/opt/kafka/external-configuration/connect-creds-postgresql:user}
+    connection.password: ${file:/opt/kafka/external-configuration/connect-creds-postgresql:password}
+    # behaviour
+    insert.mode: upsert
+    auto.create: true
+    # primary key
+    pk.mode: record_value
+    pk.fields: id
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

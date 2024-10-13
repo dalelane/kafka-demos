@@ -1,0 +1,20 @@
+# ---------------------------------------------------------------
+# PostgreSQL JDBC sink
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: pgsqljdbc-sink-topic
+  namespace: event-automation
+spec:
+  topicName: pgsqljdbcsink
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 10 MB
+    retention.bytes: '10000000'
+    # 1 week
+    retention.ms: '604800000'
