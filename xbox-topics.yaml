@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------
+# Xbox updates about game achievements
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: xbox-achievements-topic
+  namespace: event-automation
+spec:
+  topicName: XBOX.ACHIEVEMENTS
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 100 MB
+    retention.bytes: '100000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Xbox updates about changes in user status
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: xbox-presence-topic
+  namespace: event-automation
+spec:
+  topicName: XBOX.PRESENCE
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 150 MB
+    retention.bytes: '150000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+
+---
+# ---------------------------------------------------------------
+# Xbox updates about posts by users
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: xbox-userposts-topic
+  namespace: event-automation
+spec:
+  topicName: XBOX.USERPOSTS
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+
+---
+# ---------------------------------------------------------------
+# Xbox updates about text posts on the network
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: xbox-textposts-topic
+  namespace: event-automation
+spec:
+  topicName: XBOX.TEXTPOSTS
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'

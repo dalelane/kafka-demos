@@ -1,0 +1,29 @@
+# ---------------------------------------------------------------
+# Xbox social updates
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: xbox-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.xboxlive.XblSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    topic.prefix: XBOX.
+    # config
+    xbl.api.poll.interval: 600
+    xbl.api.key: ${file:/opt/kafka/external-configuration/connect-creds-xbox:XBLIO_API_KEY}
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

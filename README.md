@@ -172,3 +172,26 @@ curl \
 ```
 
 _Note: Enable the REST Producer on the Event Streams cluster by adding `restProducer: {}` to `spec`._
+
+
+### Xbox updates
+
+1. Create [a free API key](https://xbl.io/)
+2. Update the [`xbox-credentials.yaml`](./xbox-credentials.yaml) file
+3. Create the credentials and topics
+    ```sh
+    oc apply -f xbox-credentials.yaml
+    oc apply -f xbox-topics.yaml
+    ```
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-xbox` section in `.spec.externalConfiguration`
+5. Apply the updated Kafka Connect spec
+    ```sh
+    oc apply -f kafka-connect.yaml
+    ```
+6. Create the connector
+    ```
+    oc apply -f xbox-connector.yaml
+    ```
+
+To demonstrate:
+- verify Kafka messages on Event Streams on the `XBOX.ACHIEVEMENTS`, `XBOX.PRESENCE`, `XBOX.TEXTPOSTS`, `XBOX.USERPOSTS` topics
