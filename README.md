@@ -5,10 +5,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ## Pre-requisites
 
 1. Create the default IBM Event Automation demo environment
-    - Use the instructions at https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md
-    - Choose one of the options with persistent storage
+    - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md) (choosing one of the options with persistent storage)
 2. Seed the Event Endpoint Management catalog
-    - Use the instructions at https://github.com/IBM/event-automation-demo/tree/main?tab=readme-ov-file#step-2---populate-the-catalog
+    - Use the instructions [here](https://github.com/IBM/event-automation-demo/tree/main?tab=readme-ov-file#step-2---populate-the-catalog)
 3. Modify the Kafka Connect deployment to add additional connectors
     ```sh
     oc apply -f mqtt-credentials.yaml
@@ -65,7 +64,7 @@ To demonstrate:
 
 ### Stock trading events
 
-1. Create a free API key at https://www.alphavantage.co/support/#api-key
+1. Create [a free API key](https://www.alphavantage.co/support/#api-key)
 2. Update the [`stocktrades-credentials.yaml`](./stocktrades-credentials.yaml) file
 3. Create the credentials and topics
     ```sh
@@ -103,7 +102,7 @@ To demonstrate:
 
 ### Weather updates
 
-1. Create a free API key at https://openweathermap.org/api
+1. Create [a free API key](https://openweathermap.org/api)
 2. Update the [`weather-credentials.yaml`](./weather-credentials.yaml) file
 3. Create the credentials and topics
     ```sh
