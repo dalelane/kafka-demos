@@ -36,6 +36,9 @@ spec:
       # - name: connect-creds-weather
       #   configMap:
       #     name: connect-creds-weather
+      # - name: connect-creds-postgresql
+      #   secret:
+      #     secretName: pgsqldemo-pguser-demouser
   authentication:
     passwordSecret:
       password: password
@@ -71,6 +74,8 @@ spec:
     trustedCertificates:
       - certificate: ca.crt
         secretName: my-kafka-cluster-cluster-ca-cert
+      # - certificate: ca.crt
+      #   secretName: pgsqldemo-cluster-cert
   replicas: 3
   build:
     output:
@@ -137,15 +142,23 @@ spec:
           - type: jar
             url: 'https://github.com/dalelane/kafka-connect-wikipedia-source/releases/download/0.0.2/kafka-connect-wikipedia-source-0.0.2-jar-with-dependencies.jar'
       # ---------------------------------------------------------------
-      # demo-set: debezium
+      # demo-set: postgresql
       # ---------------------------------------------------------------
       # Change-data-capture connector for PostgreSQL databases
-      - name: debezium
+      - name: postgresql
         artifacts:
           - artifact: debezium-connector-postgres
             group: io.debezium
             type: maven
-            version: 2.6.2.Final
+            version: 2.7.3.Final
+          - artifact: apicurio-registry-serdes-avro-serde
+            group: io.apicurio
+            type: maven
+            version: 2.5.10.Final
+          - artifact: apicurio-registry-utils-converter
+            group: io.apicurio
+            type: maven
+            version: 2.5.10.Final
       # ---------------------------------------------------------------
       # demo-set: weather
       # ---------------------------------------------------------------

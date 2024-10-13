@@ -100,6 +100,25 @@ To demonstrate:
 - verify Kafka messages on Event Streams on the `WIKIPEDIA` topic
 
 
+### PostgreSQL updates
+
+1. Create the PostgreSQL database
+    - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md#postgresql)
+2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` section in `.spec.externalConfiguration`, **and** the `pgsqldemo-cluster-cert` section in `.spec.tls`
+3. Apply the updated Kafka Connect spec
+    ```sh
+    oc apply -f kafka-connect.yaml
+    ```
+4. Create the topics
+    ```sh
+    oc apply -f postgresql-topics.yaml
+    ```
+5. Create the connector
+    ```sh
+    oc apply -f postgresql-connector.yaml
+    ```
+
+
 ### Weather updates
 
 1. Create [a free API key](https://openweathermap.org/api)

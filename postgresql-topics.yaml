@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# PostgreSQL updates to the 'buildings' table
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: postgresql-buildings-topic
+  namespace: event-automation
+spec:
+  topicName: pgsqldemo.public.buildings
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# PostgreSQL updates to the 'warehouses' table
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: postgresql-warehouses-topic
+  namespace: event-automation
+spec:
+  topicName: pgsqldemo.public.warehouses
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
