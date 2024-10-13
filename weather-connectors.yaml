@@ -1,0 +1,78 @@
+# ---------------------------------------------------------------
+# Weather updates for IBM Hursley, UK
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: weather-hursley-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: org.apache.camel.kafkaconnector.weather.CamelWeatherSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.storage.StringConverter
+    value.converter.schemas.enable: false
+    # target
+    topics: WEATHER.HURSLEY
+    # config
+    camel.source.endpoint.mode: JSON
+    camel.source.endpoint.delay: 120000
+    camel.source.endpoint.units: metric
+    camel.source.endpoint.lat: 51.02671210773644
+    camel.source.endpoint.lon: -1.3988643964483924
+    camel.source.path.name: unused
+    camel.source.endpoint.appid: ${file:/opt/kafka/external-configuration/connect-creds-weather:OPENWEATHER_API_KEY}
+    # transforms
+    transforms: dropheaders
+    transforms.dropheaders.type: org.apache.kafka.connect.transforms.DropHeaders
+    transforms.dropheaders.headers: 'CamelHeader.CamelWeatherQuery,CamelProperty.CamelToEndpoint'
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# Weather updates for IBM Armonk, US
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: weather-armonk-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: org.apache.camel.kafkaconnector.weather.CamelWeatherSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.storage.StringConverter
+    value.converter.schemas.enable: false
+    # target
+    topics: WEATHER.ARMONK
+    # config
+    camel.source.endpoint.mode: JSON
+    camel.source.endpoint.delay: 120000
+    camel.source.endpoint.units: metric
+    camel.source.endpoint.lat: 41.10803301294116
+    camel.source.endpoint.lon: -73.7200679845792
+    camel.source.path.name: unused
+    camel.source.endpoint.appid: ${file:/opt/kafka/external-configuration/connect-creds-weather:OPENWEATHER_API_KEY}
+    # transforms
+    transforms: dropheaders
+    transforms.dropheaders.type: org.apache.kafka.connect.transforms.DropHeaders
+    transforms.dropheaders.headers: 'CamelHeader.CamelWeatherQuery,CamelProperty.CamelToEndpoint'
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

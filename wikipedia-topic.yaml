@@ -1,0 +1,20 @@
+# ---------------------------------------------------------------
+# Wikipedia updates
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: wikipedia-topic
+  namespace: event-automation
+spec:
+  topicName: WIKIPEDIA
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 100 MB
+    retention.bytes: '100000000'
+    # 3 months
+    retention.ms: '7889400000'

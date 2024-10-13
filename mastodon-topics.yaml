@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# Social media posts about Netflix
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: mastodon-netflix-topic
+  namespace: event-automation
+spec:
+  topicName: MASTODON.NETFLIX
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Social media posts about Xbox
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: mastodon-xbox-topic
+  namespace: event-automation
+spec:
+  topicName: MASTODON.XBOX
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'

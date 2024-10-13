@@ -1,0 +1,87 @@
+# ---------------------------------------------------------------
+# IBM
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: stocktrades-ibm-topic
+  namespace: event-automation
+spec:
+  topicName: STOCKTRADES.IBM
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Microsoft
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: stocktrades-microsoft-topic
+  namespace: event-automation
+spec:
+  topicName: STOCKTRADES.MICROSOFT
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Salesforce
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: stocktrades-salesforce-topic
+  namespace: event-automation
+spec:
+  topicName: STOCKTRADES.SALESFORCE
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Google
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: stocktrades-google-topic
+  namespace: event-automation
+spec:
+  topicName: STOCKTRADES.GOOGLE
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+

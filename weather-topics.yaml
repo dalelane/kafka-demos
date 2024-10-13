@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# Weather updates for IBM Hursley, UK
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: weather-hursley-topic
+  namespace: event-automation
+spec:
+  topicName: WEATHER.HURSLEY
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'
+
+---
+# ---------------------------------------------------------------
+# Weather updates for IBM Armonk, US
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: weather-armonk-topic
+  namespace: event-automation
+spec:
+  topicName: WEATHER.ARMONK
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 50 MB
+    retention.bytes: '50000000'
+    # 3 months
+    retention.ms: '7889400000'

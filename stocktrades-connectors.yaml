@@ -1,0 +1,146 @@
+# ---------------------------------------------------------------
+# IBM
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: stocktrades-ibm-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.stockprices.StockPriceSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    topic: STOCKTRADES.IBM
+    # config
+    stock.symbol: IBM
+    delay.hours: 168
+    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    # transforms
+    transforms: symbol
+    transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.symbol.static.field: stock
+    transforms.symbol.static.value: IBM
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# Microsoft
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: stocktrades-microsoft-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.stockprices.StockPriceSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    topic: STOCKTRADES.MICROSOFT
+    # config
+    stock.symbol: MSFT
+    delay.hours: 168
+    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    # transforms
+    transforms: symbol
+    transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.symbol.static.field: stock
+    transforms.symbol.static.value: MSFT
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# Salesforce
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: stocktrades-salesforce-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.stockprices.StockPriceSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    topic: STOCKTRADES.SALESFORCE
+    # config
+    stock.symbol: CRM
+    delay.hours: 168
+    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    # transforms
+    transforms: symbol
+    transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.symbol.static.field: stock
+    transforms.symbol.static.value: CRM
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# Google
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: stocktrades-google-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.stockprices.StockPriceSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    topic: STOCKTRADES.GOOGLE
+    # config
+    stock.symbol: GOOG
+    delay.hours: 168
+    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    # transforms
+    transforms: symbol
+    transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.symbol.static.field: stock
+    transforms.symbol.static.value: GOOG
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

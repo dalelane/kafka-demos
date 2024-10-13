@@ -1,0 +1,68 @@
+# ---------------------------------------------------------------
+# MQTT source
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: mqtt-source-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: io.lenses.streamreactor.connect.mqtt.source.MqttSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.converters.ByteArrayConverter
+    value.converter.schemas.enable: false
+    # config
+    connect.mqtt.client.id: easource
+    connect.mqtt.service.quality: 1
+    connect.mqtt.kcql: INSERT INTO MQTT.SOURCE SELECT * FROM /eventautomation/demo/source
+    connect.mqtt.hosts: ${file:/opt/kafka/external-configuration/connect-creds-mqtt:INSTANCE}
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# MQTT sink
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: mqtt-sink-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: io.lenses.streamreactor.connect.mqtt.sink.MqttSinkConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # source
+    topics: MQTT.SINK
+    # config
+    connect.mqtt.client.id: easink
+    connect.mqtt.service.quality: 1
+    connect.mqtt.clean: true
+    connect.mqtt.kcql: INSERT INTO /eventautomation/demo/sink SELECT * FROM MQTT.SINK
+    connect.mqtt.hosts: ${file:/opt/kafka/external-configuration/connect-creds-mqtt:INSTANCE}
+    # error tolerance
+    errors.tolerance: all
+    connect.mqtt.error.policy: RETRY
+    connect.mqtt.max.retries: 10
+    connect.mqtt.retry.interval: 10000
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

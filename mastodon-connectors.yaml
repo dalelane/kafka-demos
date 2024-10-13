@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------
+# Social media posts about Netflix
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: mastodon-netflix-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.mastodon.source.MastodonSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    mastodon.topic: MASTODON.NETFLIX
+    # config
+    mastodon.searchterm: netflix
+    mastodon.instance: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:INSTANCE}
+    mastodon.accesstoken: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:ACCESSTOKEN}
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# Social media posts about Xbox
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: mastodon-xbox-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.mastodon.source.MastodonSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    mastodon.topic: MASTODON.XBOX
+    # config
+    mastodon.searchterm: xbox
+    mastodon.instance: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:INSTANCE}
+    mastodon.accesstoken: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:ACCESSTOKEN}
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

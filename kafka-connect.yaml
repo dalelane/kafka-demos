@@ -1,0 +1,158 @@
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnect
+metadata:
+  annotations:
+    eventstreams.ibm.com/use-connector-resources: 'true'
+  name: kafka-connect-cluster
+  namespace: event-automation
+spec:
+  config:
+    group.id: kafka-connect
+    client.id: kafka-connect-client
+    config.storage.topic: connect-configs
+    offset.storage.topic: connect-offsets
+    status.storage.topic: connect-status
+    config.providers: file
+    config.providers.file.class: org.apache.kafka.common.config.provider.DirectoryConfigProvider
+  bootstrapServers: 'my-kafka-cluster-kafka-bootstrap.event-automation.svc:9095'
+  resources:
+    limits:
+      cpu: 2048m
+      memory: 2Gi
+    requests:
+      cpu: 2048m
+      memory: 2Gi
+  externalConfiguration:
+    volumes:
+      - name: connect-creds-mqtt
+        configMap:
+          name: connect-creds-mqtt
+      # - name: connect-creds-mastodon
+      #   configMap:
+      #     name: connect-creds-mastodon
+      # - name: connect-creds-stocktrades
+      #   configMap:
+      #     name: connect-creds-stocktrades
+      # - name: connect-creds-weather
+      #   configMap:
+      #     name: connect-creds-weather
+  authentication:
+    passwordSecret:
+      password: password
+      secretName: kafka-connect-credentials
+    type: scram-sha-512
+    username: kafka-connect-credentials
+  template:
+    buildConfig:
+      pullSecret: ibm-entitlement-key
+    connectContainer:
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+    pod:
+      imagePullSecrets: []
+      metadata:
+        annotations:
+          cloudpakId: c8b82d189e7545f0892db9ef2731b90d
+          productVersion: 11.5.0
+          productID: 2a79e49111f44ec3acd89608e56138f5
+          cloudpakName: IBM Cloud Pak for Integration
+          productChargedContainers: kafka-connect-cluster-connect
+          productCloudpakRatio: '2:1'
+          productName: IBM Event Streams for Non Production
+          eventstreams.production.type: CloudPakForIntegrationNonProduction
+          productMetric: VIRTUAL_PROCESSOR_CORE
+  tls:
+    trustedCertificates:
+      - certificate: ca.crt
+        secretName: my-kafka-cluster-cluster-ca-cert
+  replicas: 3
+  build:
+    output:
+      type: docker
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.0
+    plugins:
+      # ---------------------------------------------------------------
+      # demo-set : datagen
+      # ---------------------------------------------------------------
+      # "Loosehanger" data generator - generates random events based on a fictional clothing retailer
+      #  Used for many of the tutorials at https://ibm.github.io/event-automation/tutorials
+      - name: datagen
+        artifacts:
+          - type: jar
+            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.1.2/kafka-connect-loosehangerjeans-source-0.1.2-jar-with-dependencies.jar
+          - artifact: apicurio-registry-serdes-avro-serde
+            group: io.apicurio
+            type: maven
+            version: 2.5.10.Final
+          - artifact: apicurio-registry-utils-converter
+            group: io.apicurio
+            type: maven
+            version: 2.5.10.Final
+      # ---------------------------------------------------------------
+      # demo-set: mq-source
+      # ---------------------------------------------------------------
+      # MQ Source connector - for getting data from MQ queues
+      #  Including support for XML messages in MQ
+      - name: mq-source
+        artifacts:
+          - type: jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.1.0/kafka-connect-mq-source-2.1.0-jar-with-dependencies.jar
+          - type: jar
+            url: https://github.com/ibm-messaging/kafka-connect-xml-converter/releases/download/0.1.0/kafka-connect-xml-converter-0.1.0-jar-with-dependencies.jar
+      # ---------------------------------------------------------------
+      # demo-set: mqtt
+      # ---------------------------------------------------------------
+      - name: mqtt
+        artifacts:
+          - type: zip
+            url: 'https://github.com/lensesio/stream-reactor/releases/download/7.4.5/kafka-connect-mqtt-7.4.5.zip'
+      # ---------------------------------------------------------------
+      # demo-set: mastodon
+      # ---------------------------------------------------------------
+      # Social media posts from Mastodon
+      - name: mastodon
+        artifacts:
+          - type: jar
+            url: 'https://github.com/dalelane/kafka-connect-mastodon-source/releases/download/0.0.3/kafka-connect-mastodon-source-0.0.3-jar-with-dependencies.jar'
+      # ---------------------------------------------------------------
+      # demo-set: stocktrades
+      # ---------------------------------------------------------------
+      # Stock trading activity from AlphaVantage
+      - name: stocktrades
+        artifacts:
+          - type: jar
+            url: https://github.com/dalelane/kafka-connect-stockprice-source/releases/download/v0.0.3/kafka-connect-stockprice-source-connector.jar
+      # ---------------------------------------------------------------
+      # demo-set: wikipedia
+      # ---------------------------------------------------------------
+      # Wikipedia page creations and edits
+      - name: wikipedia
+        artifacts:
+          - type: jar
+            url: 'https://github.com/dalelane/kafka-connect-wikipedia-source/releases/download/0.0.2/kafka-connect-wikipedia-source-0.0.2-jar-with-dependencies.jar'
+      # ---------------------------------------------------------------
+      # demo-set: debezium
+      # ---------------------------------------------------------------
+      # Change-data-capture connector for PostgreSQL databases
+      - name: debezium
+        artifacts:
+          - artifact: debezium-connector-postgres
+            group: io.debezium
+            type: maven
+            version: 2.6.2.Final
+      # ---------------------------------------------------------------
+      # demo-set: weather
+      # ---------------------------------------------------------------
+      # Weather updates
+      - name: weather
+        artifacts:
+          - artifact: camel-weather-kafka-connector
+            group: org.apache.camel.kafkaconnector
+            type: maven
+            version: 0.11.5

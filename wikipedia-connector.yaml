@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------
+# Wikipedia updates
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: wikipedia-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: uk.co.dalelane.kafkaconnect.wikipedia.source.WikipediaSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # target
+    wikipedia.topic: WIKIPEDIA
+    # config
+    wikipedia.pollinterval.secs: 60
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
