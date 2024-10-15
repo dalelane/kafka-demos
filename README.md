@@ -87,6 +87,12 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
 - produce JSON Kafka messages to the `MQTT.SINK` topic on Event Streams
 - verify MQTT messages from [HiveMQ MQTT broker](https://www.mqtt-dashboard.com/) using the `/eventautomation/demo/sink` topic
 
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  MQTT.SOURCE
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  MQTT.SINK
+```
+
 ---
 
 ### Social media updates

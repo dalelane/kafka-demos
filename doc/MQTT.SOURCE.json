@@ -1,0 +1,19 @@
+{
+    "type": "kafka",
+    "name": "Messages from MQTT",
+    "alias": "MQTT.SOURCE",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Messages received from the /eventautomation/demo/source topic on a public MQTT broker.",
+    "tags": [
+        "text"
+    ],
+    "encoding": "text/plain",
+    "sampleMessages": [
+        "Hello World"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "MQTT.SOURCE"
+    },
+    "capabilities": [ "consume" ]
+}

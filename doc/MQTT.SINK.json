@@ -1,0 +1,19 @@
+{
+    "type": "kafka",
+    "name": "Messages for MQTT",
+    "alias": "MQTT.SINK",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Messages to send to the /eventautomation/demo/sink topic on a public MQTT broker.",
+    "tags": [
+        "text"
+    ],
+    "encoding": "text/plain",
+    "sampleMessages": [
+        "Hello World"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "MQTT.SINK"
+    },
+    "capabilities": [ "produce" ]
+}
