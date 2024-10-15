@@ -1,0 +1,94 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MastodonUpdate",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "ID of the status in the database. Cast from an integer but not guaranteed to be a number"
+      },
+      "uri": {
+        "type": "string",
+        "description": "URI of the status used for federation."
+      },
+      "content": {
+        "type": "string",
+        "description": "HTML-encoded status content."
+      },
+      "isSensitive": {
+        "type": "boolean",
+        "description": "True if the status update contains "
+      },
+      "language": {
+        "type": "string",
+        "description": "Primary language of this status. ISO 639 Part 1 two-letter language code."
+      },
+      "createdAt": {
+        "type": "string"
+      },
+      "account": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the account, not including domain."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The profile’s display name. Can be an empty string."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL. The location of the user’s profile page."
+          },
+          "note": {
+            "type": "string",
+            "description": "HTML. Contains the profile’s bio or description."
+          },
+          "avatar": {
+            "type": "string",
+            "description": "URL. An image icon that is shown next to statuses and in the profile."
+          },
+          "avatarStatic": {
+            "type": "string",
+            "description": "URL. A static version of the avatar. This can be null or equal to avatar if its value is a static image; different if avatar is an animated GIF."
+          },
+          "bot": {
+            "type": "boolean",
+            "description": "Indicates that the account may perform automated actions, may not be monitored, or identifies as a robot."
+          }
+        },
+        "required": [
+          "username",
+          "url",
+          "note",
+          "avatar",
+          "bot"
+        ]
+      },
+      "application": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the application used to post the status update, if known."
+          },
+          "website": {
+            "type": "string",
+            "description": "Website associated with the application used to post the status update, if known."
+          }
+        },
+        "required": [
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "uri",
+      "content",
+      "isSensitive",
+      "language",
+      "account",
+      "application"
+    ]
+  }

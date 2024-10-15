@@ -1,0 +1,21 @@
+{
+    "id": "113309657301350427",
+    "uri": "https://mastodon.social/users/biped808/statuses/113309657327517752",
+    "content": "<p>Finished <a href=\"https://mastodon.social/tags/Bodkin\" class=\"mention hashtag\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">#<span>Bodkin</span></a> on <a href=\"https://mastodon.social/tags/Netflix\" class=\"mention hashtag\" rel=\"nofollow noopener noreferrer\" target=\"_blank\">#<span>Netflix</span></a>. Great mystery and writing. Made me want to visit Ireland…</p>",
+    "isSensitive": false,
+    "language": "en",
+    "createdAt": null,
+    "account": {
+        "username": "biped808",
+        "displayName": "",
+        "url": "https://mastodon.social/@biped808",
+        "note": "<p>Former IT professional. Current librarian, c/o 2022 MEd in Learning Design and Technology (LTEC). Current PhD student.Hobbies include watching streaming video &amp; learning new things. (And trying to workout more!) Mixed plate bipedal creature.</p>",
+        "avatar": "https://cdn.mastodon.org.uk/cache/accounts/avatars/109/425/387/115/188/037/original/6a043d540aa8c3de.jpeg",
+        "avatarStatic": "",
+        "bot": false
+    },
+    "application": {
+        "name": "Elk",
+        "website": "https://elk.zone/"
+    }
+}

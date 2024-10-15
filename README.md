@@ -27,11 +27,11 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f mqtt-connectors.yaml
     ```
 
-To demonstrate the source connector:
+**To demonstrate the source connector:**
 - publish MQTT messages to [HiveMQ MQTT broker](https://www.mqtt-dashboard.com/) using the `/eventautomation/demo/source` topic
 - verify Kafka messages on Event Streams on the `MQTT.SOURCE` topic
 
-To demonstrate the sink connector:
+**To demonstrate the sink connector:**
 - produce JSON Kafka messages to the `MQTT.SINK` topic on Event Streams
 - verify MQTT messages from [HiveMQ MQTT broker](https://www.mqtt-dashboard.com/) using the `/eventautomation/demo/sink` topic
 
@@ -57,10 +57,15 @@ To demonstrate the sink connector:
     oc apply -f mastodon-connectors.yaml
     ```
 
-To demonstrate:
+**To demonstrate:**
 - post updates to Mastodon using the #netflix or #xbox hashtag
 - verify Kafka messages on Event Streams on the `MASTODON.NETFLIX` or `MASTODON.XBOX` topics
 
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  MASTODON.NETFLIX
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  MASTODON.XBOX
+```
 
 ### Stock trading events
 
@@ -81,10 +86,10 @@ To demonstrate:
     oc apply -f stocktrades-connectors.yaml
     ```
 
-To demonstrate:
+**To demonstrate:**
 - verify Kafka messages on Event Streams on the `STOCKTRADES.IBM`, `STOCKTRADES.MICROSOFT`, `STOCKTRADES.SALESFORCE`, `STOCKTRADES.GOOGLE` topics
 
-To add the topics to Event Endpoint Management:
+**To add the topics to Event Endpoint Management:**
 ```sh
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.IBM
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.MICROSOFT
@@ -104,10 +109,10 @@ To add the topics to Event Endpoint Management:
     oc apply -f wikipedia-connector.yaml
     ```
 
-To demonstrate:
+**To demonstrate:**
 - verify Kafka messages on Event Streams on the `WIKIPEDIA` topic
 
-To add the topic to Event Endpoint Management:
+**To add the topic to Event Endpoint Management:**
 ```sh
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  WIKIPEDIA
 ```
@@ -151,10 +156,10 @@ To add the topic to Event Endpoint Management:
     oc apply -f weather-connectors.yaml
     ```
 
-To demonstrate:
+**To demonstrate:**
 - verify Kafka messages on Event Streams on the `WEATHER.HURSLEY`, `WEATHER.ARMONK` topics
 
-To add the topics to Event Endpoint Management:
+**To add the topics to Event Endpoint Management:**
 ```sh
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  WEATHER.HURSLEY
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  WEATHER.ARMONK
@@ -212,5 +217,5 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
     oc apply -f xbox-connector.yaml
     ```
 
-To demonstrate:
+**To demonstrate:**
 - verify Kafka messages on Event Streams on the `XBOX.ACHIEVEMENTS`, `XBOX.PRESENCE`, `XBOX.TEXTPOSTS`, `XBOX.USERPOSTS` topics
