@@ -1,0 +1,23 @@
+{
+    "type": "kafka",
+    "name": "Orders from IBM MQ",
+    "alias": "IBMMQ.SOURCE",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Orders received from the IBMMQ.KAFKA queue on the IBM MQ queue manager. Orders in MQ are processed as XML documents but are converted into JSON as part of transferring to the Kafka topic.",
+    "tags": [
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"customer\": {\n      \"name\": \"Helen Velazquez\",\n      \"phone\": {\n        \"type\": \"landline\",\n        \"number\": \"0911 910 5491\"\n      },\n      \"email\": \"mus.donec.dignissim@yahoo.ca\",\n      \"address\": \"3249 Hendrerit Av.\",\n      \"postalZip\": \"F2 1IX\",\n      \"region\": \"Dunbartonshire\"\n    },\n    \"product\": [\n      {\n        \"brand\": \"Acme Inc\",\n        \"item\": \"Awesome-ivator\",\n        \"quantity\": 1\n      },\n      {\n        \"brand\": \"Globex\",\n        \"item\": \"Widget\",\n        \"quantity\": 2\n      }\n    ],\n    \"order\": {\n      \"date\": \"2023-11-05 22:11:00\"\n    }\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n    \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n    \"title\": \"MQOrder\",\n    \"type\": \"object\",\n    \"properties\": {\n      \"customer\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"phone\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"type\": {\n                \"type\": \"string\"\n              },\n              \"number\": {\n                \"type\": \"string\"\n              }\n            },\n            \"required\": [\n              \"type\",\n              \"number\"\n            ]\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"postalZip\": {\n            \"type\": \"string\"\n          },\n          \"region\": {\n            \"type\": \"string\"\n          }\n        },\n        \"required\": [\n          \"name\",\n          \"phone\",\n          \"email\",\n          \"address\",\n          \"postalZip\",\n          \"region\"\n        ]\n      },\n      \"product\": {\n        \"type\": \"array\",\n        \"items\": [\n          {\n            \"type\": \"object\",\n            \"properties\": {\n              \"brand\": {\n                \"type\": \"string\"\n              },\n              \"item\": {\n                \"type\": \"string\"\n              },\n              \"quantity\": {\n                \"type\": \"integer\"\n              }\n            },\n            \"required\": [\n              \"brand\",\n              \"item\",\n              \"quantity\"\n            ]\n          },\n          {\n            \"type\": \"object\",\n            \"properties\": {\n              \"brand\": {\n                \"type\": \"string\"\n              },\n              \"item\": {\n                \"type\": \"string\"\n              },\n              \"quantity\": {\n                \"type\": \"integer\"\n              }\n            },\n            \"required\": [\n              \"brand\",\n              \"item\",\n              \"quantity\"\n            ]\n          }\n        ]\n      },\n      \"order\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"date\": {\n            \"type\": \"string\"\n          }\n        },\n        \"required\": [\n          \"date\"\n        ]\n      }\n    },\n    \"required\": [\n      \"customer\",\n      \"product\",\n      \"order\"\n    ]\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "IBMMQ.SOURCE"
+    },
+    "capabilities": [ "consume" ]
+}

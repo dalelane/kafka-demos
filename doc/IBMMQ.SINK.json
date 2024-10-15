@@ -1,0 +1,19 @@
+{
+    "type": "kafka",
+    "name": "Messages for IBM MQ",
+    "alias": "IBMMQ.SINK",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Messages to send to the KAFKA.IBMMQ queue on the IBM MQ queue manager. Messages should be sent as JSON messages, and will be converted into XML documents before transferring to IBM MQ.",
+    "tags": [
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"message\": \"Hello world\",\n    \"count\": 123\n}"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "IBMMQ.SINK"
+    },
+    "capabilities": [ "produce" ]
+}

@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# IBM MQ source
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: ibmmq-source-topic
+  namespace: event-automation
+spec:
+  topicName: IBMMQ.SOURCE
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 10 MB
+    retention.bytes: '10000000'
+    # 1 week
+    retention.ms: '604800000'
+
+---
+# ---------------------------------------------------------------
+# IBM MQ sink
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: ibmmq-sink-topic
+  namespace: event-automation
+spec:
+  topicName: IBMMQ.SINK
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    # 10 MB
+    retention.bytes: '10000000'
+    # 1 week
+    retention.ms: '604800000'

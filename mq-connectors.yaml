@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------
+# IBM MQ source
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: ibmmq-source-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: com.ibm.eventstreams.connect.mqsource.MQSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    mq.record.builder: com.ibm.eventstreams.kafkaconnect.plugins.xml.XmlMQRecordBuilder
+    mq.record.builder.root.element.name: ordermessage
+    mq.record.builder.xsd.schema.path: /opt/kafka/external-configuration/connect-schemas-ibmmq/mq-source-message.xsd
+    # source
+    mq.queue: IBMMQ.KAFKA
+    # target
+    topic: IBMMQ.SOURCE
+    # config
+    mq.channel.name: KAFKA.SVRCONN
+    mq.queue.manager: MYQMGR
+    mq.connection.name.list: queuemanager-ibm-mq(1414)
+    mq.message.body.jms: true
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
+---
+# ---------------------------------------------------------------
+# IBM MQ sink
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: ibmmq-sink-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: com.ibm.eventstreams.connect.mqsink.MQSinkConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    mq.message.builder: com.ibm.eventstreams.connect.mqsink.builders.ConverterMessageBuilder
+    mq.message.builder.value.converter: com.ibm.eventstreams.kafkaconnect.plugins.xml.XmlConverter
+    mq.message.builder.value.converter.root.element.name: msg
+    # source
+    topics: IBMMQ.SINK
+    # target
+    mq.queue: KAFKA.IBMMQ
+    # config
+    mq.channel.name: KAFKA.SVRCONN
+    mq.queue.manager: MYQMGR
+    mq.connection.name.list: queuemanager-ibm-mq(1414)
+    mq.message.body.jms: true
+    # error tolerance
+    errors.tolerance: all
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

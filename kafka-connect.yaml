@@ -42,6 +42,9 @@ spec:
       # - name: connect-creds-xbox
       #   configMap:
       #     name: connect-creds-xbox
+      # - name: connect-schemas-ibmmq
+      #   configMap:
+      #     name: ibmmq-schemas
   authentication:
     passwordSecret:
       password: password
@@ -103,14 +106,16 @@ spec:
             type: maven
             version: 2.5.10.Final
       # ---------------------------------------------------------------
-      # demo-set: mq-source
+      # demo-set: IBM MQ
       # ---------------------------------------------------------------
-      # MQ Source connector - for getting data from MQ queues
+      # MQ Source and Sink connectors
       #  Including support for XML messages in MQ
-      - name: mq-source
+      - name: ibmmq
         artifacts:
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.1.0/kafka-connect-mq-source-2.1.0-jar-with-dependencies.jar
+          - type: jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-sink/releases/download/v2.2.1/kafka-connect-mq-sink-2.2.1-jar-with-dependencies.jar
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-xml-converter/releases/download/0.1.0/kafka-connect-xml-converter-0.1.0-jar-with-dependencies.jar
       # ---------------------------------------------------------------
