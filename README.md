@@ -284,17 +284,20 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
 
 1. Create [a free API key](https://xbl.io/)
 2. Update the [`xbox-credentials.yaml`](./xbox-credentials.yaml) file
-3. Create the credentials and topics
+3. Create the credentials
     ```sh
     oc apply -f xbox-credentials.yaml
+    ```
+4. Create the topics
+    ```sh
     oc apply -f xbox-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-xbox` section in `.spec.externalConfiguration`
-5. Apply the updated Kafka Connect spec
+5. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-xbox` section in `.spec.externalConfiguration`
+6. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
     ```
-6. Create the connector
+7. Create the connector
     ```
     oc apply -f xbox-connector.yaml
     ```
@@ -306,6 +309,42 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
 ```sh
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  XBOX.ACHIEVEMENTS
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  XBOX.PRESENCE
+```
+
+---
+
+### HTTP POST updates
+
+1. Create a free account at https://pipedream.com/requestbin
+2. Create a Request Bin
+3. Copy the generated URL for triggering the new HTTP workflow
+4. Update [`restapi-connectors.yaml`](./restapi-connectors.yaml) to set `http.url` in `.spec.config` to the generated URL
+5. Create the topic
+    ```sh
+    oc apply -f restapi-topic.yaml
+    ```
+6. Create the connector
+    ```sh
+    oc apply -f restapi-connectors.yaml
+    ```
+
+**To demonstrate:**
+- send Kafka JSON messages to the `RESTAPI.SINK` topic:
+```sh
+curl \
+    --silent -k \
+    -X POST \
+    -H "Content-Type: application/json" \
+    --data @sample-messages/RESTAPI.SINK.json \
+    -u kafka-demo-apps:$(oc get secret kafka-demo-apps -nevent-automation -ojsonpath='{.data.password}' | base64 -d) \
+    https://$(oc get eventstreams my-kafka-cluster -o jsonpath='{.status.routes.recapi-external}')/topics/RESTAPI.SINK/records > /dev/null
+```
+- verify by viewing the RequestBin - messages will be submitted to the REST API and displayed in the web view
+
+
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  RESTAPI.SINK
 ```
 
 ---

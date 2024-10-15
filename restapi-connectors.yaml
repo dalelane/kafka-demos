@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------
+# HTTP POST
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: restapi-sink-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: io.aiven.kafka.connect.http.HttpSinkConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # source
+    topics: RESTAPI.SINK
+    # target
+    http.url: https://REPLACE-THIS-WITH-REST-API-ENDPOINT
+    # config
+    http.authorization.type: none
+    http.headers.content.type: application/json
+    # error tolerance
+    errors.tolerance: all
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true

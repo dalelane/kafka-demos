@@ -1,0 +1,19 @@
+{
+    "type": "kafka",
+    "name": "Messages for REST API",
+    "alias": "RESTAPI.SINK",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Messages to send to a public REST API.",
+    "tags": [
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"name\": \"new data from Apache Kafka\",\n    \"data\": {\n        \"somevalue\": 123,\n        \"anothervalue\": \"message\"\n    }\n}"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "RESTAPI.SINK"
+    },
+    "capabilities": [ "produce" ]
+}

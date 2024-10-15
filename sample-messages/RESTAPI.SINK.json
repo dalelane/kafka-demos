@@ -1,0 +1,7 @@
+{
+    "name": "new data from Apache Kafka",
+    "data": {
+        "somevalue": 123,
+        "anothervalue": "message"
+    }
+}
