@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "XboxPresence",
+    "type": "object",
+    "properties": {
+      "date": {
+        "type": "string"
+      },
+      "userid": {
+        "type": "string"
+      },
+      "state": {
+        "type": "string",
+        "description": "Online or Offline"
+      },
+      "titleid": {
+        "type": "string",
+        "description": "null if the status is Offline"
+      },
+      "titlename": {
+        "type": "string",
+        "description": "null if the status is Offline"
+      }
+    },
+    "required": [
+      "date",
+      "userid",
+      "state"
+    ]
+}

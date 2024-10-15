@@ -1,0 +1,23 @@
+{
+    "type": "kafka",
+    "name": "Xbox users presence",
+    "alias": "XBOX.PRESENCE",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Notifications of what games friends in your gaming network are playing.",
+    "tags": [
+        "xbox",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"date\": \"2024-10-13T23:35:02.896565Z\",\n    \"userid\": \"2533274819921149\",\n    \"state\": \"Online\",\n    \"titleid\": \"2001700854\",\n    \"titlename\": \"Call of Duty®\"\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n    \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n    \"title\": \"XboxPresence\",\n    \"type\": \"object\",\n    \"properties\": {\n      \"date\": {\n        \"type\": \"string\"\n      },\n      \"userid\": {\n        \"type\": \"string\"\n      },\n      \"state\": {\n        \"type\": \"string\",\n        \"description\": \"Online or Offline\"\n      },\n      \"titleid\": {\n        \"type\": \"string\",\n        \"description\": \"null if the status is Offline\"\n      },\n      \"titlename\": {\n        \"type\": \"string\",\n        \"description\": \"null if the status is Offline\"\n      }\n    },\n    \"required\": [\n      \"date\",\n      \"userid\",\n      \"state\"\n    ]\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "XBOX.PRESENCE"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "type": "kafka",
+    "name": "Xbox achievements",
+    "alias": "XBOX.ACHIEVEMENTS",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Gaming achievements recorded by gamers in your social network.",
+    "tags": [
+        "xbox",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"date\": \"2024-10-13T09:18:37.191Z\",\n    \"gamertag\": \"alanchatt123\",\n    \"gamername\": \"Alan Chatt\",\n    \"name\": \"Power Shot\",\n    \"description\": \"Score a goal using the power shot mechanic\",\n    \"icon\": \"http://images-eds.xboxlive.com/image?url=27S1DHqE.cHkmFg4nspsdwPTnSdXfPpBspCOeUi8nKgMFKeuOeoopokmcqpfijIk8ewqrb6KzKRUQ8aZ75QghPGNkpZlqr5xu0YNJmxunxBnm34IoeUxSNF9fcf3Izlr\",\n    \"contentname\": \"EA SPORTS FC™ 25 Xbox Series X|S\",\n    \"contentimage\": \"http://store-images.s-microsoft.com/image/apps.19344.13738418562228928.2f1b7c14-3e99-4a31-8375-ffc682a65cb0.2b4e09e5-281d-4184-9cf6-70277a5a54b5\",\n    \"platform\": \"XboxOne\",\n    \"gamerscore\": 15,\n    \"rarityscore\": 47,\n    \"raritycategory\": \"Common\"\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n    \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n    \"title\": \"XboxAchievements\",\n    \"type\": \"object\",\n    \"properties\": {\n      \"date\": {\n        \"type\": \"string\"\n      },\n      \"gamertag\": {\n        \"type\": \"string\"\n      },\n      \"gamername\": {\n        \"type\": \"string\"\n      },\n      \"name\": {\n        \"type\": \"string\"\n      },\n      \"description\": {\n        \"type\": \"string\"\n      },\n      \"icon\": {\n        \"type\": \"string\"\n      },\n      \"contentname\": {\n        \"type\": \"string\"\n      },\n      \"contentimage\": {\n        \"type\": \"string\"\n      },\n      \"platform\": {\n        \"type\": \"string\"\n      },\n      \"gamerscore\": {\n        \"type\": \"integer\"\n      },\n      \"rarityscore\": {\n        \"type\": \"integer\"\n      },\n      \"raritycategory\": {\n        \"type\": \"string\"\n      }\n    },\n    \"required\": [\n      \"date\",\n      \"gamertag\",\n      \"gamername\",\n      \"name\",\n      \"description\",\n      \"icon\",\n      \"contentname\",\n      \"contentimage\",\n      \"platform\",\n      \"gamerscore\",\n      \"rarityscore\",\n      \"raritycategory\"\n    ]\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "XBOX.ACHIEVEMENTS"
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "XboxAchievements",
+    "type": "object",
+    "properties": {
+      "date": {
+        "type": "string"
+      },
+      "gamertag": {
+        "type": "string"
+      },
+      "gamername": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "icon": {
+        "type": "string"
+      },
+      "contentname": {
+        "type": "string"
+      },
+      "contentimage": {
+        "type": "string"
+      },
+      "platform": {
+        "type": "string"
+      },
+      "gamerscore": {
+        "type": "integer"
+      },
+      "rarityscore": {
+        "type": "integer"
+      },
+      "raritycategory": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "date",
+      "gamertag",
+      "gamername",
+      "name",
+      "description",
+      "icon",
+      "contentname",
+      "contentimage",
+      "platform",
+      "gamerscore",
+      "rarityscore",
+      "raritycategory"
+    ]
+}

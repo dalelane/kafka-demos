@@ -35,6 +35,7 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 - produce JSON Kafka messages to the `MQTT.SINK` topic on Event Streams
 - verify MQTT messages from [HiveMQ MQTT broker](https://www.mqtt-dashboard.com/) using the `/eventautomation/demo/sink` topic
 
+---
 
 ### Social media updates
 
@@ -67,6 +68,8 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  MASTODON.XBOX
 ```
 
+---
+
 ### Stock trading events
 
 1. Create [a free API key](https://www.alphavantage.co/support/#api-key)
@@ -97,6 +100,7 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  STOCKTRADES.GOOGLE
 ```
 
+---
 
 ### Wikipedia edits
 
@@ -117,6 +121,7 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  WIKIPEDIA
 ```
 
+---
 
 ### PostgreSQL updates
 
@@ -136,6 +141,7 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f postgresql-connector.yaml
     ```
 
+---
 
 ### Weather updates
 
@@ -165,6 +171,7 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ./add-to-catalog.sh  <EEM ACCESS TOKEN>  WEATHER.ARMONK
 ```
 
+---
 
 ### JDBC sink
 
@@ -197,6 +204,7 @@ curl \
 
 _Note: Enable the REST Producer on the Event Streams cluster by adding `restProducer: {}` to `spec`._
 
+---
 
 ### Xbox updates
 
@@ -219,3 +227,11 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
 
 **To demonstrate:**
 - verify Kafka messages on Event Streams on the `XBOX.ACHIEVEMENTS`, `XBOX.PRESENCE`, `XBOX.TEXTPOSTS`, `XBOX.USERPOSTS` topics
+
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  XBOX.ACHIEVEMENTS
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  XBOX.PRESENCE
+```
+
+---
