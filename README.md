@@ -141,6 +141,16 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f postgresql-connector.yaml
     ```
 
+**To demonstrate:**
+- insert/update/delete rows into the `buildings` or `warehouses` tables in the pgsqldemo database
+
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  pgsqldemo.public.buildings
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  pgsqldemo.public.warehouses
+```
+
+
 ---
 
 ### Weather updates

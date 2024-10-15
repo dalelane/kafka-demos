@@ -1,0 +1,31 @@
+{
+    "before": null,
+    "after": {
+      "warehouseid": "Central",
+      "location": "Leicamport",
+      "sqft": 41000,
+      "managerid": "93111071832",
+      "status": 0
+    },
+    "source": {
+      "version": "2.7.3.Final",
+      "connector": "postgresql",
+      "name": "pgsqldemo",
+      "ts_ms": 1728850255827,
+      "snapshot": "last",
+      "db": "pgsqldemo",
+      "sequence": "[null,\"100663392\"]",
+      "ts_us": 1728850255827413,
+      "ts_ns": 1728850255827413000,
+      "schema": "public",
+      "table": "warehouses",
+      "txId": 791,
+      "lsn": 100663392,
+      "xmin": null
+    },
+    "transaction": null,
+    "op": "r",
+    "ts_ms": 1728850256361,
+    "ts_us": 1728850256361191,
+    "ts_ns": 1728850256361191200
+}

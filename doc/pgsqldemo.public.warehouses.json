@@ -1,0 +1,20 @@
+{
+    "type": "kafka",
+    "name": "Warehouse updates",
+    "alias": "pgsqldemo.public.warehouses",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Changes from the logistics system to warehouse records. Events are emitted by a change data capture connector listening to the logistics database, and will be in Debezium format.",
+    "tags": [
+        "database", "cdc", "logistics",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"before\": null,\n    \"after\": {\n      \"warehouseid\": \"Central\",\n      \"location\": \"Leicamport\",\n      \"sqft\": 41000,\n      \"managerid\": \"93111071832\",\n      \"status\": 0\n    },\n    \"source\": {\n      \"version\": \"2.7.3.Final\",\n      \"connector\": \"postgresql\",\n      \"name\": \"pgsqldemo\",\n      \"ts_ms\": 1728850255827,\n      \"snapshot\": \"last\",\n      \"db\": \"pgsqldemo\",\n      \"sequence\": \"[null,\\\"100663392\\\"]\",\n      \"ts_us\": 1728850255827413,\n      \"ts_ns\": 1728850255827413000,\n      \"schema\": \"public\",\n      \"table\": \"warehouses\",\n      \"txId\": 791,\n      \"lsn\": 100663392,\n      \"xmin\": null\n    },\n    \"transaction\": null,\n    \"op\": \"r\",\n    \"ts_ms\": 1728850256361,\n    \"ts_us\": 1728850256361191,\n    \"ts_ns\": 1728850256361191200\n}"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "pgsqldemo.public.warehouses"
+    },
+    "capabilities": [ "consume" ]
+}

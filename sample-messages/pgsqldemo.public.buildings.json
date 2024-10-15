@@ -1,0 +1,29 @@
+{
+    "before": null,
+    "after": {
+      "buildingid": "G",
+      "streetname": "Heartswood Road",
+      "securitycontact": "+1 202-918-7019"
+    },
+    "source": {
+      "version": "2.7.3.Final",
+      "connector": "postgresql",
+      "name": "pgsqldemo",
+      "ts_ms": 1728850255827,
+      "snapshot": "true",
+      "db": "pgsqldemo",
+      "sequence": "[null,\"100663392\"]",
+      "ts_us": 1728850255827413,
+      "ts_ns": 1728850255827413000,
+      "schema": "public",
+      "table": "buildings",
+      "txId": 791,
+      "lsn": 100663392,
+      "xmin": null
+    },
+    "transaction": null,
+    "op": "r",
+    "ts_ms": 1728850256339,
+    "ts_us": 1728850256339846,
+    "ts_ns": 1728850256339846700
+}

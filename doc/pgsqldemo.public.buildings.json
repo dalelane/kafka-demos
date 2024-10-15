@@ -1,0 +1,20 @@
+{
+    "type": "kafka",
+    "name": "Loosehanger building updates",
+    "alias": "pgsqldemo.public.buildings",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Changes from the logistics system to building records. Events are emitted by a change data capture connector listening to the logistics database, and will be in Debezium format.",
+    "tags": [
+        "database", "cdc", "logistics",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"before\": null,\n    \"after\": {\n      \"buildingid\": \"G\",\n      \"streetname\": \"Heartswood Road\",\n      \"securitycontact\": \"+1 202-918-7019\"\n    },\n    \"source\": {\n      \"version\": \"2.7.3.Final\",\n      \"connector\": \"postgresql\",\n      \"name\": \"pgsqldemo\",\n      \"ts_ms\": 1728850255827,\n      \"snapshot\": \"true\",\n      \"db\": \"pgsqldemo\",\n      \"sequence\": \"[null,\\\"100663392\\\"]\",\n      \"ts_us\": 1728850255827413,\n      \"ts_ns\": 1728850255827413000,\n      \"schema\": \"public\",\n      \"table\": \"buildings\",\n      \"txId\": 791,\n      \"lsn\": 100663392,\n      \"xmin\": null\n    },\n    \"transaction\": null,\n    \"op\": \"r\",\n    \"ts_ms\": 1728850256339,\n    \"ts_us\": 1728850256339846,\n    \"ts_ns\": 1728850256339846700\n}"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "pgsqldemo.public.buildings"
+    },
+    "capabilities": [ "consume" ]
+}
