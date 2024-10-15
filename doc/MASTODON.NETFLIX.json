@@ -20,5 +20,6 @@
     "clusterId": "CLUSTERID",
     "topic": {
         "name": "MASTODON.NETFLIX"
-    }
+    },
+    "capabilities": [ "consume" ]
 }

@@ -19,5 +19,6 @@
     "clusterId": "CLUSTERID",
     "topic": {
         "name": "WIKIPEDIA"
-    }
+    },
+    "capabilities": [ "consume" ]
 }

@@ -20,5 +20,6 @@
     "clusterId": "CLUSTERID",
     "topic": {
         "name": "WEATHER.HURSLEY"
-    }
+    },
+    "capabilities": [ "consume" ]
 }

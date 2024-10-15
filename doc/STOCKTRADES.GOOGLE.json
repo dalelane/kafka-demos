@@ -21,5 +21,6 @@
     "clusterId": "CLUSTERID",
     "topic": {
         "name": "STOCKTRADES.GOOGLE"
-    }
+    },
+    "capabilities": [ "consume" ]
 }

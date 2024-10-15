@@ -191,7 +191,8 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f pgsqljdbc-connector.yaml
     ```
 
-To verify, send Kafka JSON messages to the `pgsqljdbcsink` topic:
+**To demonstrate:**
+- send Kafka JSON messages to the `pgsqljdbcsink` topic:
 ```sh
 curl \
     --silent -k \
@@ -203,6 +204,11 @@ curl \
 ```
 
 _Note: Enable the REST Producer on the Event Streams cluster by adding `restProducer: {}` to `spec`._
+
+**To add the topic to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  pgsqljdbcsink
+```
 
 ---
 

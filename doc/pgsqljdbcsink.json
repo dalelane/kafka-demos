@@ -1,0 +1,20 @@
+{
+    "type": "kafka",
+    "name": "Database updates",
+    "alias": "pgsqljdbcsink",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Stores updates in the PostgreSQL database table to demonstrate a JDBC sink connector.",
+    "tags": [
+        "postgresql",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"schema\": {\n      \"type\": \"struct\",\n      \"fields\": [\n        {\n          \"field\": \"id\",\n          \"type\": \"int32\",\n          \"optional\": false\n        },\n        {\n          \"field\": \"mycol1\",\n          \"type\": \"string\",\n          \"optional\": false\n        },\n        {\n          \"field\": \"mycol2\",\n          \"type\": \"string\",\n          \"optional\": false\n        },\n        {\n          \"field\": \"mycol3\",\n          \"type\": \"int32\",\n          \"optional\": false\n        }\n      ]\n    },\n    \"payload\": {\n        \"id\": 100000,\n        \"mycol1\": \"apple\",\n        \"mycol2\": \"banana\",\n        \"mycol3\": 123\n    }\n}"
+    ],
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "pgsqljdbcsink"
+    },
+    "capabilities": [ "produce" ]
+}

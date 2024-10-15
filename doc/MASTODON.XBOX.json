@@ -20,5 +20,6 @@
     "clusterId": "CLUSTERID",
     "topic": {
         "name": "MASTODON.XBOX"
-    }
+    },
+    "capabilities": [ "consume" ]
 }
