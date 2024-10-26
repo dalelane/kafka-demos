@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="ordermessage">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id"         type="xs:string"/>
+                <xs:element name="customer"   type="customerRecord"/>
+                <xs:element name="creditcard" type="creditCardRecord" minOccurs="0"/>
+                <xs:element name="products"   type="productRecord" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="ordertime"  type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="customerRecord">
+        <xs:sequence>
+            <xs:element name="id"    type="xs:string"/>
+            <xs:element name="name"  type="nameRecord"/>
+            <xs:element name="phone" type="phoneNumberRecord"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="phoneNumberRecord">
+        <xs:attribute name="type"   type="xs:string"/>
+        <xs:attribute name="number" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="nameRecord">
+        <xs:sequence>
+            <xs:element name="firstname" type="xs:string" minOccurs="0"/>
+            <xs:element name="lastname"  type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="creditCardRecord">
+        <xs:sequence>
+            <xs:element name="number" type="xs:string"/>
+            <xs:element name="expiry" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="productRecord">
+        <xs:all>
+            <xs:element name="id"          type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="cost"        type="xs:decimal"/>
+            <xs:element name="quantity"    type="xs:positiveInteger"/>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

@@ -1,24 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8"?>
 <ordermessage>
+    <id>f7ef4939-645e-4a16-8bef-494235e6b28e</id>
     <customer>
-        <name>Helen Velazquez</name>
-        <phone type="landline" number="0911 910 5491"/>
-        <email>mus.donec.dignissim@yahoo.ca</email>
-        <address>3249 Hendrerit Av.</address>
-        <postalZip>F2 1IX</postalZip>
-        <region>Dunbartonshire</region>
+        <id>3daf1bc0-9514-4226-8364-1852c403e39f</id>
+        <name>
+            <firstname>Melissa</firstname>
+            <lastname>Goodwin</lastname>
+        </name>
+        <phone type="landline" number="056 1565 9006"/>
     </customer>
-    <product>
-        <brand>Acme Inc</brand>
-        <item>Awesome-ivator</item>
+    <creditcard>
+        <number>6771-8970-5432-3442</number>
+        <expiry>10/27</expiry>
+    </creditcard>
+    <products>
+        <id>d9132411-0e26-4692-9002-d20dd91d68b0</id>
+        <description>Synergistic Iron Gloves</description>
+        <cost>64.45</cost>
         <quantity>1</quantity>
-    </product>
-    <product>
-        <brand>Globex</brand>
-        <item>Widget</item>
-        <quantity>2</quantity>
-    </product>
-    <order>
-        <date>2023-11-05 22:11:00</date>
-    </order>
+    </products>
+    <ordertime>2024-10-26 22:05:38.340</ordertime>
 </ordermessage>

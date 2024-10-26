@@ -33,32 +33,33 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     ```sh
     oc apply -f kafka-connect.yaml
     ```
-6. Using the IBM MQ web UI, create two local queues:
-    - `IBMMQ.KAFKA`
-    - `KAFKA.IBMMQ`
-7. Create the connectors
+6. Create the connectors
     ```sh
     oc apply -f mq-connectors.yaml
     ```
+7. Build the IBM MQ apps
+    ```sh
+    cd apps/ibmmq
+    mvn clean package
+
+    oc apply -f ocp-build.yaml
+    oc start-build bc/eventautomation-mq-demo-apps -n event-automation --from-file=./target/mq-demo-app-0.0.1-jar-with-dependencies.jar --follow
+    ```
+8. Deploy the IBM MQ apps
+    ```sh
+    oc apply -f ocp-deploy.yaml
+    ```
 
 **To demonstrate the source connector:**
-- publish an [XML MQ message consistent with this sample](./sample-messages/IBMMQ.KAFKA.xml) to the `IBMMQ.KAFKA` topic using the IBM MQ web UI
+- the "putter" MQ app is putting XML MQ messages such as [this sample](./sample-messages/IBMMQ.KAFKA.xml) to the `IBMMQ.KAFKA` topic
 - verify the JSON representation of the Kafka message on Event Streams on the `IBMMQ.SOURCE` topic
 
 **To demonstrate the sink connector:**
-- send Kafka JSON messages to the `IBMMQ.SINK` topic:
-```sh
-curl \
-    --silent -k \
-    -X POST \
-    -H "Content-Type: application/json" \
-    --data @sample-messages/IBMMQ.SINK.json \
-    -u kafka-demo-apps:$(oc get secret kafka-demo-apps -nevent-automation -ojsonpath='{.data.password}' | base64 -d) \
-    https://$(oc get eventstreams my-kafka-cluster -o jsonpath='{.status.routes.recapi-external}')/topics/IBMMQ.SINK/records > /dev/null
-```
-- verify the XML representation of the message on the `KAFKA.IBMMQ` IBM MQ queue using the IBM MQ web UI
+- use Event Processing to process the events from the `IBMMQ.SOURCE` topic and output the results to the `IBMMQ.SINK` topic
+- verify the XML representation of the message on the `KAFKA.IBMMQ` IBM MQ queue using the log of the "getter" MQ app
 
-_Note: Enable the REST Producer on the Event Streams cluster by adding `restProducer: {}` to `spec`._
+**Overview:**
+![diagram](./diagrams/ibmmq-demo.png)
 
 **To add the topics to Event Endpoint Management:**
 ```sh

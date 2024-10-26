@@ -1,28 +1,27 @@
 {
+    "id": "f7ef4939-645e-4a16-8bef-494235e6b28e",
     "customer": {
-      "name": "Helen Velazquez",
-      "phone": {
-        "type": "landline",
-        "number": "0911 910 5491"
-      },
-      "email": "mus.donec.dignissim@yahoo.ca",
-      "address": "3249 Hendrerit Av.",
-      "postalZip": "F2 1IX",
-      "region": "Dunbartonshire"
+        "id": "3daf1bc0-9514-4226-8364-1852c403e39f",
+        "name": {
+            "firstname": "Melissa",
+            "lastname": "Goodwin"
+        },
+        "phone": {
+            "type": "landline",
+            "number": "056 1565 9006"
+        }
     },
-    "product": [
-      {
-        "brand": "Acme Inc",
-        "item": "Awesome-ivator",
-        "quantity": 1
-      },
-      {
-        "brand": "Globex",
-        "item": "Widget",
-        "quantity": 2
-      }
+    "creditcard": {
+        "number": "6771-8970-5432-3442",
+        "expiry": "10/27"
+    },
+    "products": [
+        {
+            "id": "d9132411-0e26-4692-9002-d20dd91d68b0",
+            "description": "Synergistic Iron Gloves",
+            "cost": 64.45,
+            "quantity": 1
+        }
     ],
-    "order": {
-      "date": "2023-11-05 22:11:00"
-    }
+    "ordertime": "2024-10-26 22:05:38.340"
 }

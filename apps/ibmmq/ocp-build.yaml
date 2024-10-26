@@ -1,0 +1,33 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: eventautomation-mq-demo-apps
+  namespace: event-automation
+  labels:
+    build: eventautomation-mq-demo-apps
+spec:
+  lookupPolicy:
+    local: false
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: eventautomation-mq-demo-apps
+  namespace: event-automation
+  labels:
+    build: eventautomation-mq-demo-apps
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'eventautomation-mq-demo-apps:latest'
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java:openjdk-17-ubi8'
+  source:
+    type: Binary
+    binary: {}

@@ -3,11 +3,30 @@
     "title": "MQOrder",
     "type": "object",
     "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid"
+      },
       "customer": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "name": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "lastname"
+            ]
           },
           "phone": {
             "type": "object",
@@ -23,87 +42,67 @@
               "type",
               "number"
             ]
-          },
-          "email": {
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "phone"
+        ]
+      },
+      "creditcard": {
+        "type": "object",
+        "properties": {
+          "number": {
             "type": "string"
           },
-          "address": {
-            "type": "string"
-          },
-          "postalZip": {
-            "type": "string"
-          },
-          "region": {
+          "expiry": {
             "type": "string"
           }
         },
         "required": [
-          "name",
-          "phone",
-          "email",
-          "address",
-          "postalZip",
-          "region"
+          "number",
+          "expiry"
         ]
       },
-      "product": {
+      "products": {
         "type": "array",
         "items": [
           {
             "type": "object",
             "properties": {
-              "brand": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "description": {
                 "type": "string"
               },
-              "item": {
-                "type": "string"
-              },
-              "quantity": {
-                "type": "integer"
-              }
-            },
-            "required": [
-              "brand",
-              "item",
-              "quantity"
-            ]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "brand": {
-                "type": "string"
-              },
-              "item": {
-                "type": "string"
+              "cost": {
+                "type": "number"
               },
               "quantity": {
                 "type": "integer"
               }
             },
             "required": [
-              "brand",
-              "item",
+              "id",
+              "description",
+              "cost",
               "quantity"
             ]
           }
         ]
       },
-      "order": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "date"
-        ]
+      "ordertime": {
+        "type": "string",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{1,3}$"
       }
     },
     "required": [
+      "id",
       "customer",
-      "product",
-      "order"
+      "products",
+      "ordertime"
     ]
 }

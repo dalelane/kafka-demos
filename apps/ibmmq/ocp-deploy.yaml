@@ -1,0 +1,135 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: eventautomation-mq-demo-putter
+  namespace: event-automation
+immutable: true
+data:
+  message-template.xml: |-
+    <?xml version="1.1" encoding="UTF-8"?>
+    <ordermessage>
+        <id>1_TEMPLATE_ORDER_ID</id>
+        <customer>
+            <id>2_TEMPLATE_CUSTOMER_ID</id>
+            <name>
+                <firstname>3_TEMPLATE_CUSTOMER_FIRSTNAME</firstname>
+                <lastname>4_TEMPLATE_CUSTOMER_LASTNAME</lastname>
+            </name>
+            <phone type="5_TEMPLATE_PHONE_TYPE" number="6_TEMPLATE_PHONE_NUMBER"/>
+        </customer>
+        <creditcard>
+            <number>7_TEMPLATE_CREDITCARD_NUMBER</number>
+            <expiry>8_TEMPLATE_CREDITCARD_EXPIRY</expiry>
+        </creditcard>
+        <products>
+            <id>9_TEMPLATE_PRODUCT_ID</id>
+            <description>10_TEMPLATE_PRODUCT_DESCRIPTION</description>
+            <cost>11_TEMPLATE_PRODUCT_COST</cost>
+            <quantity>12_TEMPLATE_PRODUCT_QUANTITY</quantity>
+        </products>
+        <ordertime>13_TEMPLATE_ORDER_TIME</ordertime>
+    </ordermessage>
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: eventautomation-mq-demo-putter
+  namespace: event-automation
+  labels:
+    app: eventautomation-mq-demo-putter
+    app.kubernetes.io/component: eventautomation-mq-demo-putter
+    app.kubernetes.io/instance: eventautomation-mq-demo-putter
+    app.kubernetes.io/name: eventautomation-mq-demo-putter
+    app.kubernetes.io/part-of: eventautomation-mq-demo-putter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventautomation-mq-demo-putter
+  template:
+    metadata:
+      labels:
+        app: eventautomation-mq-demo-putter
+        deployment: eventautomation-mq-demo-putter
+    spec:
+      containers:
+        - name: putter
+          image: 'image-registry.openshift-image-registry.svc:5000/event-automation/eventautomation-mq-demo-apps:latest'
+          command:
+            - java
+          args:
+            - -cp
+            - /deployments/mq-demo-app-0.0.1-jar-with-dependencies.jar
+            - uk.co.dalelane.demos.ibmmq.Putter
+          env:
+            # connection details to IBM MQ
+            - name: MQ_HOST
+              value: queuemanager-ibm-mq
+            - name: MQ_PORT
+              value: '1414'
+            - name: MQ_QMGR
+              value: MYQMGR
+            - name: MQ_CHANNEL
+              value: KAFKA.SVRCONN
+            - name: MQ_QUEUE
+              value: IBMMQ.KAFKA
+            # how frequently to PUT messages
+            - name: MSG_INTERVAL
+              value: '30000'
+            # config for what to put in messages
+            - name: TIMESTAMP_FORMAT
+              value: yyyy-MM-dd HH:mm:ss.SSS
+            - name: MESSAGE_TEMPLATE_PATH
+              value: /opt/ea-mq-demo/message-template.xml
+          volumeMounts:
+            - name: putter-config
+              readOnly: true
+              mountPath: /opt/ea-mq-demo
+      volumes:
+        - name: putter-config
+          configMap:
+            name: eventautomation-mq-demo-putter
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: eventautomation-mq-demo-getter
+  namespace: event-automation
+  labels:
+    app: eventautomation-mq-demo-getter
+    app.kubernetes.io/component: eventautomation-mq-demo-getter
+    app.kubernetes.io/instance: eventautomation-mq-demo-getter
+    app.kubernetes.io/name: eventautomation-mq-demo-getter
+    app.kubernetes.io/part-of: eventautomation-mq-demo-getter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventautomation-mq-demo-getter
+  template:
+    metadata:
+      labels:
+        app: eventautomation-mq-demo-getter
+        deployment: eventautomation-mq-demo-getter
+    spec:
+      containers:
+        - name: getter
+          image: 'image-registry.openshift-image-registry.svc:5000/event-automation/eventautomation-mq-demo-apps:latest'
+          command:
+            - java
+          args:
+            - -cp
+            - /deployments/mq-demo-app-0.0.1-jar-with-dependencies.jar
+            - uk.co.dalelane.demos.ibmmq.Getter
+          env:
+            # connection details to IBM MQ
+            - name: MQ_HOST
+              value: queuemanager-ibm-mq
+            - name: MQ_PORT
+              value: '1414'
+            - name: MQ_QMGR
+              value: MYQMGR
+            - name: MQ_CHANNEL
+              value: KAFKA.SVRCONN
+            - name: MQ_QUEUE
+              value: KAFKA.IBMMQ

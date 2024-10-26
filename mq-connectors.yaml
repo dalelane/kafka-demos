@@ -57,7 +57,7 @@ spec:
     value.converter.schemas.enable: false
     mq.message.builder: com.ibm.eventstreams.connect.mqsink.builders.ConverterMessageBuilder
     mq.message.builder.value.converter: com.ibm.eventstreams.kafkaconnect.plugins.xml.XmlConverter
-    mq.message.builder.value.converter.root.element.name: msg
+    mq.message.builder.value.converter.root.element.name: output
     # source
     topics: IBMMQ.SINK
     # target

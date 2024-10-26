@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<ordermessage>
+    <id>1_TEMPLATE_ORDER_ID</id>
+    <customer>
+        <id>2_TEMPLATE_CUSTOMER_ID</id>
+        <name>
+            <firstname>3_TEMPLATE_CUSTOMER_FIRSTNAME</firstname>
+            <lastname>4_TEMPLATE_CUSTOMER_LASTNAME</lastname>
+        </name>
+        <phone type="5_TEMPLATE_PHONE_TYPE" number="6_TEMPLATE_PHONE_NUMBER"/>
+    </customer>
+    <creditcard>
+        <number>7_TEMPLATE_CREDITCARD_NUMBER</number>
+        <expiry>8_TEMPLATE_CREDITCARD_EXPIRY</expiry>
+    </creditcard>
+    <products>
+        <id>9_TEMPLATE_PRODUCT_ID</id>
+        <description>10_TEMPLATE_PRODUCT_DESCRIPTION</description>
+        <cost>11_TEMPLATE_PRODUCT_COST</cost>
+        <quantity>12_TEMPLATE_PRODUCT_QUANTITY</quantity>
+    </products>
+    <ordertime>13_TEMPLATE_ORDER_TIME</ordertime>
+</ordermessage>
