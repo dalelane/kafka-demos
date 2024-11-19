@@ -1,10 +1,11 @@
 {
     "type": "kafka",
-    "name": "Social media posts (#xbox)",
+    "name": "Social media posts (#xbox on Mastodon)",
     "alias": "MASTODON.XBOX",
     "contact": "dale.lane@uk.ibm.com",
     "description": "Posts made to Mastodon containing the hashtag #xbox",
     "tags": [
+        "social",
         "mastodon",
         "xbox",
         "json"

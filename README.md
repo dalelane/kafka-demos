@@ -96,7 +96,38 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 
 ---
 
-### Social media updates
+### Social media updates (Bluesky)
+
+1. Create [an app password](https://bsky.app/settings/app-passwords) in Bluesky
+2. Update the [`bluesky-credentials.yaml`](./bluesky-credentials.yaml) file, with your username and app password
+3. Create the credentials and topics
+    ```sh
+    oc apply -f bluesky-credentials.yaml
+    oc apply -f bluesky-topics.yaml
+    ```
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-bluesky` section in `.spec.externalConfiguration`
+5. Apply the updated Kafka Connect spec
+    ```sh
+    oc apply -f kafka-connect.yaml
+    ```
+6. Create the connectors
+    ```
+    oc apply -f bluesky-connectors.yaml
+    ```
+
+**To demonstrate:**
+- post updates to Bluesky using the word "netflix" or "xbox"
+- verify Kafka messages on Event Streams on the `BLUESKY.NETFLIX` or `BLUESKY.XBOX` topics
+
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  BLUESKY.NETFLIX
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  BLUESKY.XBOX
+```
+
+---
+
+### Social media updates (Mastodon)
 
 1. Create an access token at an instance of Mastodon, including the following scopes
     - `read:statuses`

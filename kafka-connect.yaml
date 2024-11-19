@@ -30,6 +30,9 @@ spec:
       # - name: connect-creds-mastodon
       #   configMap:
       #     name: connect-creds-mastodon
+      # - name: connect-creds-bluesky
+      #   configMap:
+      #     name: connect-creds-bluesky
       # - name: connect-creds-stocktrades
       #   configMap:
       #     name: connect-creds-stocktrades
@@ -68,7 +71,7 @@ spec:
       metadata:
         annotations:
           cloudpakId: c8b82d189e7545f0892db9ef2731b90d
-          productVersion: 11.5.0
+          productVersion: 11.5.1
           productID: 2a79e49111f44ec3acd89608e56138f5
           cloudpakName: IBM Cloud Pak for Integration
           productChargedContainers: kafka-connect-cluster-connect
@@ -133,6 +136,14 @@ spec:
         artifacts:
           - type: jar
             url: 'https://github.com/dalelane/kafka-connect-mastodon-source/releases/download/0.0.3/kafka-connect-mastodon-source-0.0.3-jar-with-dependencies.jar'
+      # ---------------------------------------------------------------
+      # demo-set: bluesky
+      # ---------------------------------------------------------------
+      # Social media posts from Bluesky
+      - name: bluesky
+        artifacts:
+          - type: jar
+            url: 'https://github.com/dalelane/kafka-connect-bluesky-source/releases/download/0.0.1/kafka-connect-bluesky-source-0.0.1-jar-with-dependencies.jar'
       # ---------------------------------------------------------------
       # demo-set: stocktrades
       # ---------------------------------------------------------------

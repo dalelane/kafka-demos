@@ -1,0 +1,26 @@
+{
+    "type": "kafka",
+    "name": "Social media posts (netflix on Bluesky)",
+    "alias": "BLUESKY.NETFLIX",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Posts made to Bluesky containing the word netflix",
+    "tags": [
+        "social",
+        "bluesky",
+        "netflix",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n    \"id\": {\n      \"uri\": \"at://did:plc:gssjrx12z2xtqa7gl2rny3nm/app.bsky.feed.post/3lbcqs9nsnc2a\",\n      \"cid\": \"bafybahfjnjjypu6ewy5iryvnm2nu3jwiajscbifi2dtgab7ogutkoi2caa\"\n    },\n    \"text\": \"User post in plain text here\",\n    \"langs\": [\n      \"en\"\n    ],\n    \"createdAt\": 1732030120973,\n    \"author\": {\n      \"handle\": \"username.bsky.social\",\n      \"displayName\": \"User Name\",\n      \"avatar\": \"https://cdn.bsky.app/img/avatar/plain/did:plc:gssjrx67z2hfkds7gl3rny3nm/bafkreiebwqcuhgfdjksuhy5wbwfn3by35oa77hwkagm3fliksrnuow2phoz1@jpeg\"\n    }\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"BlueskyUpdate\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"object\",\n      \"description\": \"ID of the status update\",\n      \"properties\": {\n        \"uri\": {\n          \"type\": \"string\"\n        },\n        \"cid\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"uri\",\n        \"cid\"\n      ]\n    },\n    \"text\": {\n      \"type\": \"string\",\n      \"description\": \"Plain text copy of the status update posted\"\n    },\n    \"langs\": {\n      \"type\": \"array\",\n      \"description\": \"Language of this status update. ISO 639 Part 1 two-letter language code. Array can be empty if the language is unknown\",\n      \"items\": [\n        {\n          \"type\": \"string\"\n        }\n      ]\n    },\n    \"createdAt\": {\n      \"type\": \"integer\",\n      \"description\": \"Kafka Connect timestamp field - expressed as milliseconds since epoch\"\n    },\n    \"author\": {\n      \"type\": \"object\",\n      \"description\": \"details of the user who posted the update\",\n      \"properties\": {\n        \"handle\": {\n          \"type\": \"string\",\n          \"description\": \"unique user handle - e.g. theirusername.bsky.social\"\n        },\n        \"displayName\": {\n          \"type\": \"string\",\n          \"description\": \"friendly displayable username\"\n        },\n        \"avatar\": {\n          \"type\": \"string\",\n          \"description\": \"URL to the profile picture used by the user\"\n        }\n      },\n      \"required\": [\n        \"handle\"\n      ]\n    }\n  },\n  \"required\": [\n    \"id\",\n    \"text\",\n    \"langs\",\n    \"createdAt\",\n    \"author\"\n  ]\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "BLUESKY.NETFLIX"
+    },
+    "capabilities": [ "consume" ]
+}

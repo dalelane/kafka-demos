@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "BlueskyUpdate",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "object",
+        "description": "ID of the status update",
+        "properties": {
+          "uri": {
+            "type": "string"
+          },
+          "cid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "uri",
+          "cid"
+        ]
+      },
+      "text": {
+        "type": "string",
+        "description": "Plain text copy of the status update posted"
+      },
+      "langs": {
+        "type": "array",
+        "description": "Language of this status update. ISO 639 Part 1 two-letter language code. Array can be empty if the language is unknown",
+        "items": [
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "createdAt": {
+        "type": "integer",
+        "description": "Kafka Connect timestamp field - expressed as milliseconds since epoch"
+      },
+      "author": {
+        "type": "object",
+        "description": "details of the user who posted the update",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "description": "unique user handle - e.g. theirusername.bsky.social"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "friendly displayable username"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "URL to the profile picture used by the user"
+          }
+        },
+        "required": [
+          "handle"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "text",
+      "langs",
+      "createdAt",
+      "author"
+    ]
+}

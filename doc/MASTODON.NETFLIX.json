@@ -1,10 +1,11 @@
 {
     "type": "kafka",
-    "name": "Social media posts (#netflix)",
+    "name": "Social media posts (#netflix on Mastodon)",
     "alias": "MASTODON.NETFLIX",
     "contact": "dale.lane@uk.ibm.com",
     "description": "Posts made to Mastodon containing the hashtag #netflix",
     "tags": [
+        "social",
         "mastodon",
         "netflix",
         "json"
