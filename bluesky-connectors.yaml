@@ -22,8 +22,8 @@ spec:
     # config
     bluesky.searchterm: netflix
     bluesky.poll.ms: 120000
-    bluesky.identity: ${file:/opt/kafka/external-configuration/connect-creds-bluesky:IDENTITY}
-    bluesky.password: ${file:/opt/kafka/external-configuration/connect-creds-bluesky:APP_PASSWORD}
+    bluesky.identity: ${file:/mnt/connect-creds-bluesky:IDENTITY}
+    bluesky.password: ${file:/mnt/connect-creds-bluesky:APP_PASSWORD}
   # scaling
   tasksMax: 1
   # error tolerance
@@ -55,8 +55,8 @@ spec:
     # config
     bluesky.searchterm: xbox
     bluesky.poll.ms: 120000
-    bluesky.identity: ${file:/opt/kafka/external-configuration/connect-creds-bluesky:IDENTITY}
-    bluesky.password: ${file:/opt/kafka/external-configuration/connect-creds-bluesky:APP_PASSWORD}
+    bluesky.identity: ${file:/mnt/connect-creds-bluesky:IDENTITY}
+    bluesky.password: ${file:/mnt/connect-creds-bluesky:APP_PASSWORD}
   # scaling
   tasksMax: 1
   # error tolerance

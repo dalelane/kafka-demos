@@ -22,7 +22,7 @@ spec:
     # config
     stock.symbol: IBM
     delay.hours: 168
-    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    alpha.vantage.api.key: ${file:/mnt/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
     # transforms
     transforms: symbol
     transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
@@ -59,7 +59,7 @@ spec:
     # config
     stock.symbol: MSFT
     delay.hours: 168
-    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    alpha.vantage.api.key: ${file:/mnt/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
     # transforms
     transforms: symbol
     transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
@@ -96,7 +96,7 @@ spec:
     # config
     stock.symbol: CRM
     delay.hours: 168
-    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    alpha.vantage.api.key: ${file:/mnt/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
     # transforms
     transforms: symbol
     transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value
@@ -133,7 +133,7 @@ spec:
     # config
     stock.symbol: GOOG
     delay.hours: 168
-    alpha.vantage.api.key: ${file:/opt/kafka/external-configuration/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
+    alpha.vantage.api.key: ${file:/mnt/connect-creds-stocktrades:ALPHAVANTAGE_API_KEY}
     # transforms
     transforms: symbol
     transforms.symbol.type: org.apache.kafka.connect.transforms.InsertField$Value

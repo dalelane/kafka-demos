@@ -28,7 +28,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     ```sh
     oc apply -f mq-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-schemas-ibmmq` section in `.spec.externalConfiguration`
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-schemas-ibmmq` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 5. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -105,7 +107,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f bluesky-credentials.yaml
     oc apply -f bluesky-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-bluesky` section in `.spec.externalConfiguration`
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-bluesky` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 5. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -138,7 +142,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f mastodon-credentials.yaml
     oc apply -f mastodon-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-mastodon` section in `.spec.externalConfiguration`
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-mastodon` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 5. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -169,7 +175,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f stocktrades-credentials.yaml
     oc apply -f stocktrades-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-stocktrades` section in `.spec.externalConfiguration`
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-stocktrades` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 5. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -217,7 +225,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 
 1. Create the PostgreSQL database
     - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md#postgresql)
-2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` section in `.spec.externalConfiguration`, **and** the `pgsqldemo-cluster-cert` section in `.spec.tls`
+2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` **and** `connect-cert-postgresql` sections in both:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 3. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -252,7 +262,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
     oc apply -f weather-credentials.yaml
     oc apply -f weather-topics.yaml
     ```
-4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-stocktrades` section in `.spec.externalConfiguration`
+4. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-stocktrades` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 5. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -277,7 +289,9 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 
 1. Create the PostgreSQL database
     - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md#postgresql)
-2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` section in `.spec.externalConfiguration`, **and** the `pgsqldemo-cluster-cert` section in `.spec.tls`
+2. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-postgresql` **and** `connect-cert-postgresql` sections in both:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 3. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml
@@ -324,7 +338,9 @@ _Note: Enable the REST Producer on the Event Streams cluster by adding `restProd
     ```sh
     oc apply -f xbox-topics.yaml
     ```
-5. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-xbox` section in `.spec.externalConfiguration`
+5. Update [`kafka-connect.yaml`](./kafka-connect.yaml) to un-comment the `connect-creds-xbox` sections in:
+    - `.spec.template.connectContainer.volumeMounts`
+    - `.spec.template.pod.volumes`
 6. Apply the updated Kafka Connect spec
     ```sh
     oc apply -f kafka-connect.yaml

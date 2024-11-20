@@ -19,7 +19,7 @@ spec:
     value.converter.schemas.enable: false
     mq.record.builder: com.ibm.eventstreams.kafkaconnect.plugins.xml.XmlMQRecordBuilder
     mq.record.builder.root.element.name: ordermessage
-    mq.record.builder.xsd.schema.path: /opt/kafka/external-configuration/connect-schemas-ibmmq/mq-source-message.xsd
+    mq.record.builder.xsd.schema.path: /mnt/ibmmq-schemas/mq-source-message.xsd
     # source
     mq.queue: IBMMQ.KAFKA
     # target

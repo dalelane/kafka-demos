@@ -22,32 +22,6 @@ spec:
     requests:
       cpu: 2048m
       memory: 2Gi
-  externalConfiguration:
-    volumes:
-      - name: connect-creds-mqtt
-        configMap:
-          name: connect-creds-mqtt
-      # - name: connect-creds-mastodon
-      #   configMap:
-      #     name: connect-creds-mastodon
-      # - name: connect-creds-bluesky
-      #   configMap:
-      #     name: connect-creds-bluesky
-      # - name: connect-creds-stocktrades
-      #   configMap:
-      #     name: connect-creds-stocktrades
-      # - name: connect-creds-weather
-      #   configMap:
-      #     name: connect-creds-weather
-      # - name: connect-creds-postgresql
-      #   secret:
-      #     secretName: pgsqldemo-pguser-demouser
-      # - name: connect-creds-xbox
-      #   configMap:
-      #     name: connect-creds-xbox
-      # - name: connect-schemas-ibmmq
-      #   configMap:
-      #     name: ibmmq-schemas
   authentication:
     passwordSecret:
       password: password
@@ -58,6 +32,7 @@ spec:
     buildConfig:
       pullSecret: ibm-entitlement-key
     connectContainer:
+      imagePullPolicy: IfNotPresent
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -66,7 +41,54 @@ spec:
         privileged: false
         readOnlyRootFilesystem: true
         runAsNonRoot: true
+      volumeMounts:
+        - name: connect-creds-mqtt
+          mountPath: /mnt/connect-creds-mqtt
+        # - name: connect-creds-mastodon
+        #   mountPath: /mnt/connect-creds-mastodon
+        # - name: connect-creds-bluesky
+        #   mountPath: /mnt/connect-creds-bluesky
+        # - name: connect-creds-stocktrades
+        #   mountPath: /mnt/connect-creds-stocktrades
+        # - name: connect-creds-weather
+        #   mountPath: /mnt/connect-creds-weather
+        # - name: connect-creds-postgresql
+        #   mountPath: /mnt/connect-creds-postgresql
+        # - name: connect-cert-postgresql
+        #   mountPath: /mnt/connect-cert-postgresql
+        # - name: connect-creds-xbox
+        #   mountPath: /mnt/connect-creds-xbox
+        # - name: connect-schemas-ibmmq
+        #   mountPath: /mnt/ibmmq-schemas
     pod:
+      volumes:
+        - name: connect-creds-mqtt
+          configMap:
+            name: connect-creds-mqtt
+        # - name: connect-creds-mastodon
+        #   configMap:
+        #     name: connect-creds-mastodon
+        # - name: connect-creds-bluesky
+        #   configMap:
+        #     name: connect-creds-bluesky
+        # - name: connect-creds-stocktrades
+        #   configMap:
+        #     name: connect-creds-stocktrades
+        # - name: connect-creds-weather
+        #   configMap:
+        #     name: connect-creds-weather
+        # - name: connect-creds-postgresql
+        #   secret:
+        #     secretName: pgsqldemo-pguser-demouser
+        # - name: connect-cert-postgresql
+        #   secret:
+        #     secretName: pgsqldemo-cluster-cert
+        # - name: connect-creds-xbox
+        #   configMap:
+        #     name: connect-creds-xbox
+        # - name: connect-schemas-ibmmq
+        #   configMap:
+        #     name: ibmmq-schemas
       imagePullSecrets: []
       metadata:
         annotations:
@@ -83,8 +105,6 @@ spec:
     trustedCertificates:
       - certificate: ca.crt
         secretName: my-kafka-cluster-cluster-ca-cert
-      # - certificate: ca.crt
-      #   secretName: pgsqldemo-cluster-cert
   replicas: 3
   build:
     output:

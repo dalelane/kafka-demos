@@ -21,7 +21,7 @@ spec:
     topic.prefix: XBOX.
     # config
     xbl.api.poll.interval: 600
-    xbl.api.key: ${file:/opt/kafka/external-configuration/connect-creds-xbox:XBLIO_API_KEY}
+    xbl.api.key: ${file:/mnt/connect-creds-xbox:XBLIO_API_KEY}
   # scaling
   tasksMax: 1
   # error tolerance

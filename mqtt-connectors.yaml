@@ -21,7 +21,7 @@ spec:
     connect.mqtt.client.id: easource
     connect.mqtt.service.quality: 1
     connect.mqtt.kcql: INSERT INTO MQTT.SOURCE SELECT * FROM /eventautomation/demo/source
-    connect.mqtt.hosts: ${file:/opt/kafka/external-configuration/connect-creds-mqtt:INSTANCE}
+    connect.mqtt.hosts: ${file:/mnt/connect-creds-mqtt:INSTANCE}
   # scaling
   tasksMax: 1
   # error tolerance
@@ -55,7 +55,7 @@ spec:
     connect.mqtt.service.quality: 1
     connect.mqtt.clean: true
     connect.mqtt.kcql: INSERT INTO /eventautomation/demo/sink SELECT * FROM MQTT.SINK
-    connect.mqtt.hosts: ${file:/opt/kafka/external-configuration/connect-creds-mqtt:INSTANCE}
+    connect.mqtt.hosts: ${file:/mnt/connect-creds-mqtt:INSTANCE}
     # error tolerance
     errors.tolerance: all
     connect.mqtt.error.policy: RETRY

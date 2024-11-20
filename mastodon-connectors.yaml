@@ -21,8 +21,8 @@ spec:
     mastodon.topic: MASTODON.NETFLIX
     # config
     mastodon.searchterm: netflix
-    mastodon.instance: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:INSTANCE}
-    mastodon.accesstoken: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:ACCESSTOKEN}
+    mastodon.instance: ${file:/mnt/connect-creds-mastodon:INSTANCE}
+    mastodon.accesstoken: ${file:/mnt/connect-creds-mastodon:ACCESSTOKEN}
   # scaling
   tasksMax: 1
   # error tolerance
@@ -53,8 +53,8 @@ spec:
     mastodon.topic: MASTODON.XBOX
     # config
     mastodon.searchterm: xbox
-    mastodon.instance: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:INSTANCE}
-    mastodon.accesstoken: ${file:/opt/kafka/external-configuration/connect-creds-mastodon:ACCESSTOKEN}
+    mastodon.instance: ${file:/mnt/connect-creds-mastodon:INSTANCE}
+    mastodon.accesstoken: ${file:/mnt/connect-creds-mastodon:ACCESSTOKEN}
   # scaling
   tasksMax: 1
   # error tolerance
