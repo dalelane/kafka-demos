@@ -396,3 +396,23 @@ curl \
 ```
 
 ---
+
+### REST API for enriching "Loosehanger Jeans" events
+
+1. Build the API server
+    ```sh
+    cd apps/loosehangerapi
+    ./rebuild.sh
+    ```
+2. Deploy the API server to OpenShift
+    ```sh
+    oc apply -f ocp-deploy.yaml
+    ```
+3. Access the OpenAPI document for the API
+    ```sh
+    oc get route -n event-automation loosehanger-api  -ojsonpath='http://{.status.ingress[0].host}/openapi '
+    ```
+4. Access the test interface for the API
+    ```sh
+    oc get route -n event-automation loosehanger-api  -ojsonpath='http://{.status.ingress[0].host}/openapi/ui '
+    ```

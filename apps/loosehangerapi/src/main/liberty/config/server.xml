@@ -1,0 +1,22 @@
+<server>
+  <featureManager>
+    <!-- host a web service with a REST API -->
+    <feature>restfulWS-3.1</feature>
+    <!-- support for JSON payloads -->
+    <feature>jsonb-3.0</feature>
+    <!-- generate OpenAPI documentation for the REST API -->
+    <feature>mpOpenAPI-3.1</feature>
+    <!-- support liveness endpoint -->
+    <feature>mpHealth-4.0</feature>
+  </featureManager>
+
+  <httpEndpoint
+    id="defaultHttpEndpoint"
+    host="*"
+    httpPort="${http.port}"
+    httpsPort="${https.port}"/>
+
+  <webApplication
+    contextRoot="${app.context.root}"
+    location="retail-rest-apis.war"/>
+</server>

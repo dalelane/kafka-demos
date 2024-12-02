@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loosehanger-api
+  namespace: event-automation
+  labels:
+    app: loosehanger-api
+spec:
+  selector:
+    matchLabels:
+      app: loosehanger-api
+  template:
+    metadata:
+      labels:
+        app: loosehanger-api
+    spec:
+      containers:
+      - name: apiserver
+        image: image-registry.openshift-image-registry.svc:5000/event-automation/loosehanger-api:0.1.1
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 1
+        env:
+          - name: http.port
+            value: '8000'
+          - name: https.port
+            value: '8001'
+          - name: app.context.root
+            value: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loosehanger-api
+  namespace: event-automation
+spec:
+  selector:
+    app: loosehanger-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: loosehanger-api
+  namespace: event-automation
+spec:
+  path: /
+  to:
+    name: loosehanger-api
+    kind: Service
+  port:
+    targetPort: 8000
