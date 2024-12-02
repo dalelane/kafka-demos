@@ -119,7 +119,7 @@ spec:
       - name: datagen
         artifacts:
           - type: jar
-            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.1.4/kafka-connect-loosehangerjeans-source-0.1.4-jar-with-dependencies.jar
+            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.1.5/kafka-connect-loosehangerjeans-source-0.1.5-jar-with-dependencies.jar
           - artifact: apicurio-registry-serdes-avro-serde
             group: io.apicurio
             type: maven
@@ -136,7 +136,7 @@ spec:
       - name: ibmmq
         artifacts:
           - type: jar
-            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.1.0/kafka-connect-mq-source-2.1.0-jar-with-dependencies.jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.2.0/kafka-connect-mq-source-2.2.0-jar-with-dependencies.jar
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-mq-sink/releases/download/v2.2.1/kafka-connect-mq-sink-2.2.1-jar-with-dependencies.jar
           - type: jar
