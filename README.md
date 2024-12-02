@@ -5,16 +5,18 @@ I use https://github.com/IBM/event-automation-demo to setup demos that I give us
 ## Pre-requisites
 
 1. Create the default IBM Event Automation demo environment
-    - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md) (choosing one of the options with persistent storage)
+    - Use the instructions [here](https://github.com/IBM/event-automation-demo/blob/main/INSTALL-OPTIONS.md) (choose one of the options with persistent storage)
 2. Seed the Event Endpoint Management catalog
     - Use the instructions [here](https://github.com/IBM/event-automation-demo/tree/main?tab=readme-ov-file#step-2---populate-the-catalog)
-3. Modify the Kafka Connect deployment to add additional connectors
+3. Modify the Kafka Connect deployment to start adding additional connectors
     ```sh
     oc apply -f mqtt-credentials.yaml
     oc apply -f kafka-connect.yaml
     ```
 
 ## Instructions
+
+Each of these demos is self-contained. As long as you have the [Pre-requisites listed above](#pre-requisites), you can pick and choose whichever data source(s) you need for a demo that you want to give.
 
 ### IBM MQ with XML messages
 
