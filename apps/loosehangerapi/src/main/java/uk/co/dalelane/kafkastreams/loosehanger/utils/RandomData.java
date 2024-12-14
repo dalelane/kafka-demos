@@ -27,6 +27,10 @@ public class RandomData {
         return RNG.nextBoolean();
     }
 
+    public static int getInt(int max) {
+        return RNG.nextInt(max + 1);
+    }
+
     public static Tier getTier() {
         return Tier.values()[RNG.nextInt(Tier.values().length)];
     }

@@ -11,5 +11,5 @@ export REGISTRY=`oc get route default-route -n openshift-image-registry --templa
 mvn clean package liberty:package
 
 # build and push the container
-docker build -t ${REGISTRY}/event-automation/loosehanger-api:0.1.1 .
-docker push ${REGISTRY}/event-automation/loosehanger-api:0.1.1
+docker build -t ${REGISTRY}/event-automation/loosehanger-api:0.1.2 .
+docker push ${REGISTRY}/event-automation/loosehanger-api:0.1.2
