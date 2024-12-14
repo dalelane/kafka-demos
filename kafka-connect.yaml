@@ -32,7 +32,6 @@ spec:
     buildConfig:
       pullSecret: ibm-entitlement-key
     connectContainer:
-      imagePullPolicy: IfNotPresent
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -93,7 +92,7 @@ spec:
       metadata:
         annotations:
           cloudpakId: c8b82d189e7545f0892db9ef2731b90d
-          productVersion: 11.5.1
+          productVersion: 11.5.2
           productID: 2a79e49111f44ec3acd89608e56138f5
           cloudpakName: IBM Cloud Pak for Integration
           productChargedContainers: kafka-connect-cluster-connect
@@ -123,11 +122,11 @@ spec:
           - artifact: apicurio-registry-serdes-avro-serde
             group: io.apicurio
             type: maven
-            version: 2.6.5.Final
+            version: 2.6.6.Final
           - artifact: apicurio-registry-utils-converter
             group: io.apicurio
             type: maven
-            version: 2.6.5.Final
+            version: 2.6.6.Final
       # ---------------------------------------------------------------
       # demo-set: IBM MQ
       # ---------------------------------------------------------------
@@ -136,7 +135,7 @@ spec:
       - name: ibmmq
         artifacts:
           - type: jar
-            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.2.0/kafka-connect-mq-source-2.2.0-jar-with-dependencies.jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.3.0/kafka-connect-mq-source-2.3.0-jar-with-dependencies.jar
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-mq-sink/releases/download/v2.2.1/kafka-connect-mq-sink-2.2.1-jar-with-dependencies.jar
           - type: jar
@@ -189,15 +188,15 @@ spec:
           - artifact: debezium-connector-postgres
             group: io.debezium
             type: maven
-            version: 2.7.3.Final
+            version: 2.7.4.Final
           - artifact: apicurio-registry-serdes-avro-serde
             group: io.apicurio
             type: maven
-            version: 2.5.10.Final
+            version: 2.6.6.Final
           - artifact: apicurio-registry-utils-converter
             group: io.apicurio
             type: maven
-            version: 2.5.10.Final
+            version: 2.6.6.Final
       # ---------------------------------------------------------------
       # demo-set: weather
       # ---------------------------------------------------------------
@@ -231,4 +230,4 @@ spec:
       - name: http
         artifacts:
           - type: zip
-            url: https://github.com/Aiven-Open/http-connector-for-apache-kafka/releases/download/v0.7.0/http-connector-for-apache-kafka-0.7.0.zip
+            url: https://github.com/Aiven-Open/http-connector-for-apache-kafka/releases/download/v0.8.0/http-connector-for-apache-kafka-0.8.0.zip
