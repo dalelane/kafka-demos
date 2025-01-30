@@ -1,3 +1,18 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: loosehangerapi-otel
+  namespace: event-automation
+type: Opaque
+stringData:
+  bootstrap.properties: |+
+    otel.sdk.disabled=false
+    otel.service.name=loosehanger-api
+    otel.exporter.otlp.endpoint=http://tempo-otel.monitoring:4317
+    otel.traces.exporter=otlp
+    otel.metrics.exporter=none
+    otel.logs.exporter=none
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,6 +49,15 @@ spec:
             value: '8001'
           - name: app.context.root
             value: /
+        volumeMounts:
+          - name: loosehangerapi-otel
+            mountPath: /opt/ol/wlp/usr/servers/defaultServer/bootstrap.properties
+            subPath: bootstrap.properties
+            readOnly: true
+      volumes:
+        - name: loosehangerapi-otel
+          secret:
+            secretName: loosehangerapi-otel
 ---
 apiVersion: v1
 kind: Service

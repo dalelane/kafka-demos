@@ -8,6 +8,9 @@
     <feature>mpOpenAPI-3.1</feature>
     <!-- support liveness endpoint -->
     <feature>mpHealth-4.0</feature>
+
+    <!-- enable OpenTelemetry traces -->
+    <feature>mpTelemetry-2.0</feature>
   </featureManager>
 
   <httpEndpoint
@@ -19,4 +22,7 @@
   <webApplication
     contextRoot="${app.context.root}"
     location="retail-rest-apis.war"/>
+
+  <mpTelemetry
+    source="trace"/>
 </server>
