@@ -404,7 +404,7 @@ curl \
 1. Build the API server
     ```sh
     cd apps/loosehangerapi
-    ./rebuild.sh
+    ./build.sh
     ```
 2. Deploy the API server to OpenShift
     ```sh
