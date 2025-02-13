@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------
+# Input topic that will receive XML messages
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: transform-topic-input
+  namespace: event-automation
+spec:
+  topicName: TRANSFORM
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    retention.bytes: '100000'
+
+---
+# ---------------------------------------------------------------
+# Output topic that will receive messages converted into JSON
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: transform-topic-output
+  namespace: event-automation
+spec:
+  topicName: TRANSFORM.JSON
+  partitions: 1
+  replicas: 1
+  config:
+    min.insync.replicas: '1'
+    retention.bytes: '1000000'

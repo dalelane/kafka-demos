@@ -418,3 +418,34 @@ curl \
     ```sh
     oc get route -n event-automation loosehanger-api  -ojsonpath='http://{.status.ingress[0].host}/openapi/ui '
     ```
+
+---
+
+### Using MirrorSourceConnector to transform events on local topics
+
+1. Create the topics
+    ```sh
+    oc apply -f transform-topics.yaml
+    ```
+
+2. Create the connector
+    ```sh
+    oc apply -f transform-connector.yaml
+    ```
+
+**To demonstrate:**
+- send Kafka XML messages to the `TRANSFORM` topic
+```xml
+<doc>
+    <temperature>18.4</temperature>
+    <humidity>37.1</humidity>
+</doc>
+```
+- verify that a JSON version of the event is on the `TRANSFORM.JSON` topic
+```json
+{
+    "temperature": 18.4,
+    "humidity": 37.1
+}
+```
+

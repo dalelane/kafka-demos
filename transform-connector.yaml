@@ -1,0 +1,59 @@
+# ---------------------------------------------------------------
+# Using a MirrorMaker2 connector to transform XML events to JSON
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: transform-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: org.apache.kafka.connect.mirror.MirrorSourceConnector
+  config:
+    # connection details
+    source.cluster.alias: source
+    source.cluster.bootstrap.servers: my-kafka-cluster-kafka-bootstrap.event-automation.svc:9095
+    source.cluster.sasl.jaas.config: ${file:/opt/kafka/connect-password/kafka-connect-credentials:sasl.jaas.config}
+    source.cluster.sasl.mechanism: SCRAM-SHA-512
+    source.cluster.security.protocol: SASL_SSL
+    source.cluster.ssl.truststore.location: /opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert/ca.p12
+    source.cluster.ssl.truststore.password: ${file:/opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert:ca.password}
+    source.cluster.ssl.truststore.type: PKCS12
+    target.cluster.bootstrap.servers: my-kafka-cluster-kafka-bootstrap.event-automation.svc:9095
+    target.cluster.sasl.jaas.config: ${file:/opt/kafka/connect-password/kafka-connect-credentials:sasl.jaas.config}
+    target.cluster.sasl.mechanism: SCRAM-SHA-512
+    target.cluster.security.protocol: SASL_SSL
+    target.cluster.ssl.truststore.location: /opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert/ca.p12
+    target.cluster.ssl.truststore.password: ${file:/opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert:ca.password}
+    target.cluster.ssl.truststore.type: PKCS12
+
+    # copy keys as-is
+    key.converter: org.apache.kafka.connect.converters.ByteArrayConverter
+    key.converter.schemas.enable: false
+
+    # read value of input topic as XML (without schema)
+    transforms: xmlconvert,route
+    transforms.xmlconvert.type: com.ibm.eventstreams.kafkaconnect.plugins.xml.XmlTransformation
+    transforms.xmlconvert.converter.type: value
+    transforms.xmlconvert.root.element.name: doc
+    # output value as JSON (without schema)
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+
+    # topic to convert
+    topics: TRANSFORM
+
+    # control name of destination topic
+    replication.policy.class: org.apache.kafka.connect.mirror.IdentityReplicationPolicy
+    transforms.route.type: org.apache.kafka.connect.transforms.RegexRouter
+    transforms.route.regex: (.*)
+    transforms.route.replacement: $1.JSON
+
+  # scaling
+  tasksMax: 1
+  # error tolerance
+  autoRestart:
+    enabled: true
+
