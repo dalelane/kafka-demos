@@ -423,6 +423,8 @@ curl \
 
 ### Using MirrorSourceConnector to transform events on local topics
 
+_[blog post explaining the idea behind this](https://dalelane.co.uk/blog/?p=5518)_
+
 1. Create the topics
     ```sh
     oc apply -f transform-topics.yaml
