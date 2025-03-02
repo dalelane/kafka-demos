@@ -51,6 +51,11 @@ spec:
     transforms.route.regex: (.*)
     transforms.route.replacement: $1.JSON
 
+    # disable functionality for mirror'ing use cases
+    refresh.topics.enabled: false
+    sync.topic.acls.enabled: false
+    sync.topic.configs.enabled: false
+
   # scaling
   tasksMax: 1
   # error tolerance
