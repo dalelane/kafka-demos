@@ -24,7 +24,7 @@ import uk.co.dalelane.kafkastreams.loosehanger.utils.RandomData;
  */
 public class CustomerLoyalty {
 
-    @Schema(required = true, description = "True if the customer has explicitly opted in to receive marketing emails", format = "uuid")
+    @Schema(required = true, description = "Unique identifier for the customer record", format = "uuid")
     private String customerid = null;
 
     @Schema(required = true, description = "Identifies what marketing communications the customer has opted in to receive")
