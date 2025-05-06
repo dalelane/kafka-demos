@@ -1,0 +1,25 @@
+{
+    "type": "kafka",
+    "name": "Bike hire weather forecasts",
+    "alias": "BIKESHARING.WEATHER",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Weather forecasts for the bike rental area in London (Generated data derived from the data at https://www.kaggle.com/datasets/lakshmi25npathi/bike-sharing-dataset )",
+    "tags": [
+        "bikes",
+        "weather",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n  \"temperature\": {\n    \"reading\": 13.940000000000001,\n    \"feelslike\": 15.15\n  },\n  \"type\": {\n    \"description\": \"CLOUDY\",\n    \"code\": 2\n  },\n  \"humidity\": 71,\n  \"windSpeed\": 22.0028,\n  \"time\": \"2025-03-21 02:00:00.000\"\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"Weather Data Schema\",\n  \"description\": \"Schema for validating weather data readings\",\n  \"type\": \"object\",\n  \"required\": [\n    \"temperature\",\n    \"type\",\n    \"humidity\",\n    \"windSpeed\",\n    \"time\"\n  ],\n  \"properties\": {\n    \"temperature\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"reading\",\n        \"feelslike\"\n      ],\n      \"properties\": {\n        \"reading\": {\n          \"type\": \"number\",\n          \"description\": \"Actual temperature reading\"\n        },\n        \"feelslike\": {\n          \"type\": \"number\",\n          \"description\": \"Perceived temperature accounting for weather conditions\"\n        }\n      },\n      \"additionalProperties\": false\n    },\n    \"type\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"description\",\n        \"code\"\n      ],\n      \"properties\": {\n        \"description\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"CLEAR\",\n            \"CLOUDY\",\n            \"LIGHT_RAIN\",\n            \"HEAVY_RAIN\"\n          ],\n          \"description\": \"Text description of the weather condition\"\n        },\n        \"code\": {\n          \"type\": \"integer\",\n          \"enum\": [\n            1,\n            2,\n            3,\n            4\n          ],\n          \"description\": \"Numeric code representing the weather condition\"\n        }\n      },\n      \"additionalProperties\": false\n    },\n    \"humidity\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"maximum\": 100,\n      \"description\": \"Relative humidity percentage\"\n    },\n    \"windSpeed\": {\n      \"type\": \"number\",\n      \"minimum\": 0,\n      \"description\": \"Wind speed measurement\"\n    },\n    \"time\": {\n      \"type\": \"string\",\n      \"pattern\": \"^\\\\d{4}-\\\\d{2}-\\\\d{2} \\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d{3}$\",\n      \"description\": \"Timestamp of the weather reading\"\n    }\n  },\n  \"additionalProperties\": false\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "BIKESHARING.WEATHER"
+    },
+    "capabilities": [ "consume" ]
+}

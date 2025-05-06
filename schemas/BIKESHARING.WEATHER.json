@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Weather Data Schema",
+    "description": "Schema for validating weather data readings",
+    "type": "object",
+    "required": [
+      "temperature",
+      "type",
+      "humidity",
+      "windSpeed",
+      "time"
+    ],
+    "properties": {
+      "temperature": {
+        "type": "object",
+        "required": [
+          "reading",
+          "feelslike"
+        ],
+        "properties": {
+          "reading": {
+            "type": "number",
+            "description": "Actual temperature reading"
+          },
+          "feelslike": {
+            "type": "number",
+            "description": "Perceived temperature accounting for weather conditions"
+          }
+        },
+        "additionalProperties": false
+      },
+      "type": {
+        "type": "object",
+        "required": [
+          "description",
+          "code"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "enum": [
+              "CLEAR",
+              "CLOUDY",
+              "LIGHT_RAIN",
+              "HEAVY_RAIN"
+            ],
+            "description": "Text description of the weather condition"
+          },
+          "code": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "description": "Numeric code representing the weather condition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "humidity": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Relative humidity percentage"
+      },
+      "windSpeed": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Wind speed measurement"
+      },
+      "time": {
+        "type": "string",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}$",
+        "description": "Timestamp of the weather reading"
+      }
+    },
+    "additionalProperties": false
+}

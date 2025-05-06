@@ -1,0 +1,24 @@
+{
+    "type": "kafka",
+    "name": "Bike hire locations",
+    "alias": "BIKESHARING.LOCATION",
+    "contact": "dale.lane@uk.ibm.com",
+    "description": "Current location of rental bikes in London (Generated data derived from the data at https://www.kaggle.com/datasets/lakshmi25npathi/bike-sharing-dataset )",
+    "tags": [
+        "bikes",
+        "json"
+    ],
+    "encoding": "application/json",
+    "sampleMessages": [
+        "{\n  \"journeyid\": \"823c9810-37dd-45be-9934-3a77017b125b\",\n  \"bikeid\": \"EF\",\n  \"usertype\": \"REGISTERED\",\n  \"location\": {\n    \"latitude\": 51.51158,\n    \"longitude\": -0.17647000000000002\n  },\n  \"time\": \"2025-03-20 23:13:36.896\"\n}"
+    ],
+    "schema": {
+        "type": "json",
+        "content": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"Bike Journey Data\",\n  \"description\": \"Schema for bike journey data\",\n  \"type\": \"object\",\n  \"required\": [\n    \"journeyid\",\n    \"bikeid\",\n    \"usertype\",\n    \"location\",\n    \"time\"\n  ],\n  \"properties\": {\n    \"journeyid\": {\n      \"type\": \"string\",\n      \"description\": \"Unique identifier for the journey\",\n      \"format\": \"uuid\",\n      \"pattern\": \"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\"\n    },\n    \"bikeid\": {\n      \"type\": \"string\",\n      \"description\": \"Identifier for the bicycle\",\n      \"minLength\": 1\n    },\n    \"usertype\": {\n      \"type\": \"string\",\n      \"description\": \"Type of user (REGISTERED or CASUAL)\",\n      \"enum\": [\n        \"REGISTERED\",\n        \"CASUAL\"\n      ]\n    },\n    \"location\": {\n      \"type\": \"object\",\n      \"description\": \"Geographic coordinates of the bike\",\n      \"required\": [\n        \"latitude\",\n        \"longitude\"\n      ],\n      \"properties\": {\n        \"latitude\": {\n          \"type\": \"number\",\n          \"description\": \"Latitude coordinate\",\n          \"minimum\": -90,\n          \"maximum\": 90\n        },\n        \"longitude\": {\n          \"type\": \"number\",\n          \"description\": \"Longitude coordinate\",\n          \"minimum\": -180,\n          \"maximum\": 180\n        }\n      },\n      \"additionalProperties\": false\n    },\n    \"time\": {\n      \"type\": \"string\",\n      \"description\": \"Timestamp of the journey event\",\n      \"pattern\": \"^\\\\d{4}-\\\\d{2}-\\\\d{2} \\\\d{2}:\\\\d{2}:\\\\d{2}\\\\.\\\\d{3}$\"\n    }\n  },\n  \"additionalProperties\": false\n}"
+    },
+    "clusterId": "CLUSTERID",
+    "topic": {
+        "name": "BIKESHARING.LOCATION"
+    },
+    "capabilities": [ "consume" ]
+}

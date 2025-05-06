@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Bike Journey Data",
+    "description": "Schema for bike journey data",
+    "type": "object",
+    "required": [
+      "journeyid",
+      "bikeid",
+      "usertype",
+      "location",
+      "time"
+    ],
+    "properties": {
+      "journeyid": {
+        "type": "string",
+        "description": "Unique identifier for the journey",
+        "format": "uuid",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+      },
+      "bikeid": {
+        "type": "string",
+        "description": "Identifier for the bicycle",
+        "minLength": 1
+      },
+      "usertype": {
+        "type": "string",
+        "description": "Type of user (REGISTERED or CASUAL)",
+        "enum": [
+          "REGISTERED",
+          "CASUAL"
+        ]
+      },
+      "location": {
+        "type": "object",
+        "description": "Geographic coordinates of the bike",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "Latitude coordinate",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude coordinate",
+            "minimum": -180,
+            "maximum": 180
+          }
+        },
+        "additionalProperties": false
+      },
+      "time": {
+        "type": "string",
+        "description": "Timestamp of the journey event",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}$"
+      }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,35 @@
+# ---------------------------------------------------------------
+# Current location of bikes
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: bikesharing-location
+  namespace: event-automation
+spec:
+  config:
+    min.insync.replicas: '1'
+    retention.bytes: '524288000'
+  partitions: 1
+  replicas: 3
+  topicName: BIKESHARING.LOCATION
+---
+# ---------------------------------------------------------------
+# Weather reports for bike scheme area
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: my-kafka-cluster
+  name: bikesharing-weather
+  namespace: event-automation
+spec:
+  config:
+    min.insync.replicas: '1'
+    retention.bytes: '524288000'
+  partitions: 1
+  replicas: 3
+  topicName: BIKESHARING.WEATHER

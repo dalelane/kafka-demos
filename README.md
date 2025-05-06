@@ -451,3 +451,25 @@ _[blog post explaining the idea behind this](https://dalelane.co.uk/blog/?p=5518
 }
 ```
 
+---
+
+### Bike hire scheme updates
+
+1. Create the topics
+    ```sh
+    oc apply -f bikes-topics.yaml
+    ```
+
+2. Create the connector
+    ```sh
+    oc apply -f bikes-connector.yaml
+    ```
+
+**To demonstrate:**
+- verify Kafka messages on Event Streams on the `BIKESHARING.LOCATION`, `BIKESHARING.WEATHER` topics
+
+**To add the topics to Event Endpoint Management:**
+```sh
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  BIKESHARING.LOCATION
+./add-to-catalog.sh  <EEM ACCESS TOKEN>  BIKESHARING.WEATHER
+```
