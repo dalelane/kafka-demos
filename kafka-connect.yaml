@@ -108,7 +108,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.4
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.5
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -118,7 +118,7 @@ spec:
       - name: datagen
         artifacts:
           - type: jar
-            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.2.1/kafka-connect-loosehangerjeans-source-0.2.1-jar-with-dependencies.jar
+            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.5.1/kafka-connect-loosehangerjeans-source-0.5.1-jar-with-dependencies.jar
           - artifact: apicurio-registry-serdes-avro-serde
             group: io.apicurio
             type: maven
@@ -146,7 +146,7 @@ spec:
       - name: mqtt
         artifacts:
           - type: zip
-            url: 'https://github.com/lensesio/stream-reactor/releases/download/7.4.5/kafka-connect-mqtt-7.4.5.zip'
+            url: 'https://github.com/lensesio/stream-reactor/releases/download/8.1.33/kafka-connect-mqtt-8.1.33.zip'
       # ---------------------------------------------------------------
       # demo-set: mastodon
       # ---------------------------------------------------------------
@@ -230,4 +230,4 @@ spec:
       - name: http
         artifacts:
           - type: zip
-            url: https://github.com/Aiven-Open/http-connector-for-apache-kafka/releases/download/v0.8.0/http-connector-for-apache-kafka-0.8.0.zip
+            url: https://github.com/Aiven-Open/http-connector-for-apache-kafka/releases/download/v0.9.0/http-connector-for-apache-kafka-0.9.0.zip
