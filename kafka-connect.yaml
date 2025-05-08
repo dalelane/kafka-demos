@@ -237,5 +237,5 @@ spec:
       # "Bike sharing" data generator - generates random events based on a Kaggle dataset
       - artifacts:
           - type: jar
-            url: 'https://github.com/dalelane/kafka-connect-bikesharing-source/releases/download/0.0.5/kafka-connect-bikesharing-source-0.0.5-jar-with-dependencies.jar'
+            url: 'https://github.com/dalelane/kafka-connect-bikesharing-source/releases/download/0.0.7/kafka-connect-bikesharing-source-0.0.7-jar-with-dependencies.jar'
         name: bikesharing

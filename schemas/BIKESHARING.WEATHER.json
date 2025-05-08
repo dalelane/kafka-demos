@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Weather Data Schema",
-    "description": "Schema for validating weather data readings",
+    "description": "Schema for weather data reports",
     "type": "object",
     "required": [
       "temperature",

@@ -53,6 +53,12 @@
         },
         "additionalProperties": false
       },
+      "battery": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Current battery level for the bike, expressed as a percentage"
+      },
       "time": {
         "type": "string",
         "description": "Timestamp of the journey event",
