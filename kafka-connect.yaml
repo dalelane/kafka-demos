@@ -92,7 +92,7 @@ spec:
       metadata:
         annotations:
           cloudpakId: c8b82d189e7545f0892db9ef2731b90d
-          productVersion: 11.7.0
+          productVersion: 11.8.1
           productID: 2a79e49111f44ec3acd89608e56138f5
           cloudpakName: IBM Cloud Pak for Integration
           productChargedContainers: kafka-connect-cluster-connect
@@ -108,7 +108,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.5
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.6
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -135,7 +135,7 @@ spec:
       - name: ibmmq
         artifacts:
           - type: jar
-            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.3.0/kafka-connect-mq-source-2.3.0-jar-with-dependencies.jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.5.0/kafka-connect-mq-source-2.5.0-jar-with-dependencies.jar
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-mq-sink/releases/download/v2.2.1/kafka-connect-mq-sink-2.2.1-jar-with-dependencies.jar
           - type: jar
@@ -146,7 +146,7 @@ spec:
       - name: mqtt
         artifacts:
           - type: zip
-            url: 'https://github.com/lensesio/stream-reactor/releases/download/8.1.33/kafka-connect-mqtt-8.1.33.zip'
+            url: 'https://github.com/lensesio/stream-reactor/releases/download/9.0.2/kafka-connect-mqtt-9.0.2.zip'
       # ---------------------------------------------------------------
       # demo-set: mastodon
       # ---------------------------------------------------------------
