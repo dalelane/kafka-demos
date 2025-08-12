@@ -17,6 +17,9 @@ spec:
     key.converter.schemas.enable: false
     value.converter: org.apache.kafka.connect.json.JsonConverter
     value.converter.schemas.enable: false
+    # config
+    formats.timestamps: 'yyyy-MM-dd HH:mm:ss.SSS'
+    timestamps.shift: true
   # scaling
   tasksMax: 1
   # error tolerance
