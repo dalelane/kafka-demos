@@ -1,0 +1,108 @@
+# ---------------------------------------------------------------
+# Wikipedia updates
+# ---------------------------------------------------------------
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: wikipedia-create-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: com.sse.kafka.connect.source.SseSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    data.format: json
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # source definition
+    sse.url: https://stream.wikimedia.org/v2/stream/page-create
+    sse.headers: "User-Agent:KafkaConnect/0.1"
+    sse.connection.timeout.ms: 30000
+    sse.reconnect.interval.ms: 10000
+    # target
+    kafka.topic: WIKIPEDIA
+    # output format
+    json.key.field: page_title
+    json.value.fields: $.comment,$.database,$.page_namespace,$.meta.dt,$.meta.uri,$.page_title,$.performer.user_id,$.performer.user_is_bot,$.performer.user_text,$.performer.user_registration_dt,$.performer.user_edit_count
+    include.raw.data: false
+    include.processed.data: true
+    # filtering
+    transforms: filter,unwrap,dropschema,label,cleanup,casts
+    # wikimedia create events include everything created in all wikimedia sites
+    #  filter to only full wikipedia pages in the English Wikipedia
+    transforms.filter.type: io.debezium.transforms.Filter
+    transforms.filter.language: jsr223.groovy
+    transforms.filter.condition: value.processed_data.database == 'enwiki' && value.processed_data.page_namespace == '0'
+    # unwrap the nested payload to remove the surrounding metadata
+    transforms.unwrap.type: org.apache.kafka.connect.transforms.ExtractField$Value
+    transforms.unwrap.field: processed_data
+    # remove the schema to allow new fields to be inserted
+    transforms.dropschema.type: uk.co.dalelane.kafkaconnect.transforms.DropSchemas
+    # label the type of the event
+    transforms.label.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.label.static.field: type
+    transforms.label.static.value: new
+    # remove fields that were just used for filtering but will be the same in every event
+    transforms.cleanup.type: org.apache.kafka.connect.transforms.ReplaceField$Value
+    transforms.cleanup.exclude: database,page_namespace
+    # all fields are given as strings - cast the ones that shouldn't be
+    transforms.casts.type: org.apache.kafka.connect.transforms.Cast$Value
+    transforms.casts.spec: user_is_bot:boolean,user_id:int64,user_edit_count:int32
+    transforms.casts.replace.null.with.default: false
+---
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    eventstreams.ibm.com/cluster: kafka-connect-cluster
+  name: wikipedia-edit-connector
+  namespace: event-automation
+spec:
+  # connector config
+  class: com.sse.kafka.connect.source.SseSourceConnector
+  config:
+    # format
+    key.converter: org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable: false
+    data.format: json
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    # source definition
+    sse.url: https://stream.wikimedia.org/v2/stream/revision-create
+    sse.headers: "User-Agent:KafkaConnect/0.1"
+    sse.connection.timeout.ms: 30000
+    sse.reconnect.interval.ms: 10000
+    # target
+    kafka.topic: WIKIPEDIA
+    # output format
+    json.key.field: page_title
+    json.value.fields: $.comment,$.database,$.page_namespace,$.meta.dt,$.meta.uri,$.page_title,$.performer.user_id,$.performer.user_is_bot,$.performer.user_text,$.performer.user_registration_dt,$.performer.user_edit_count
+    include.raw.data: false
+    include.processed.data: true
+    # filtering
+    transforms: filter,unwrap,dropschema,label,cleanup,casts
+    # wikimedia revision events include everything modified in all wikimedia sites
+    #  filter to only full wikipedia pages in the English Wikipedia
+    transforms.filter.type: io.debezium.transforms.Filter
+    transforms.filter.language: jsr223.groovy
+    transforms.filter.condition: value.processed_data.database == 'enwiki' && value.processed_data.page_namespace == '0'
+    # unwrap the nested payload to remove the surrounding metadata
+    transforms.unwrap.type: org.apache.kafka.connect.transforms.ExtractField$Value
+    transforms.unwrap.field: processed_data
+    # remove the schema to allow new fields to be inserted
+    transforms.dropschema.type: uk.co.dalelane.kafkaconnect.transforms.DropSchemas
+    # label the type of the event
+    transforms.label.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.label.static.field: type
+    transforms.label.static.value: edit
+    # remove fields that were just used for filtering but will be the same in every event
+    transforms.cleanup.type: org.apache.kafka.connect.transforms.ReplaceField$Value
+    transforms.cleanup.exclude: database,page_namespace
+    # all fields are given as strings - cast the ones that shouldn't be
+    transforms.casts.type: org.apache.kafka.connect.transforms.Cast$Value
+    transforms.casts.spec: user_is_bot:boolean,user_id:int64,user_edit_count:int32
+    transforms.casts.replace.null.with.default: false

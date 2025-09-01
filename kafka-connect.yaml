@@ -108,7 +108,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.7
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.8
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -172,7 +172,11 @@ spec:
       - name: wikipedia
         artifacts:
           - type: jar
-            url: 'https://github.com/dalelane/kafka-connect-wikipedia-source/releases/download/0.0.2/kafka-connect-wikipedia-source-0.0.2-jar-with-dependencies.jar'
+            url: 'https://github.com/Joel-hanson/sse-kafka-connector/releases/download/v0.0.1/kafka-connect-sse-0.0.1-jar-with-dependencies.jar'
+          - artifact: debezium-scripting
+            group: io.debezium
+            type: maven
+            version: 3.3.0.Alpha2
       # ---------------------------------------------------------------
       # demo-set: postgresql
       # ---------------------------------------------------------------

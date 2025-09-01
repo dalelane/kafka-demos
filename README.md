@@ -208,9 +208,9 @@ Each of these demos is self-contained. As long as you have the [Pre-requisites l
     ```sh
     oc apply -f wikipedia-topic.yaml
     ```
-2. Create the connector
+2. Create the connectors
     ```sh
-    oc apply -f wikipedia-connector.yaml
+    oc apply -f wikipedia-connectors.yaml
     ```
 
 **To demonstrate:**

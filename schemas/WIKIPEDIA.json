@@ -1,30 +1,121 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "WikipediaEdits",
+    "description": "Schema for Wikipedia page creation and modification events",
     "type": "object",
+    "required": [
+        "dt",
+        "type",
+        "user_text",
+        "user_is_bot",
+        "page_title",
+        "uri"
+    ],
     "properties": {
-      "type": {
-        "type": "string",
-        "enum": ["edit", "new"],
-        "description": "whether the event represents the creation of a new page, or the edit of an existing page"
-      },
-      "title": {
-        "type": "string",
-        "description": "title of the page that has been updated"
-      },
-      "user": {
-        "type": "string",
-        "description": "name of the user that made the update. If they were anonymous, this will contain their IP address (which can be IPv4 or IPv6)"
-      },
-      "userid": {
-        "type": "integer",
-        "minimum": 0,
-        "description": "ID of the user that made the update. If they were anonymous, it will be 0"
-      },
-      "timestamp": {
-        "type": "integer"
-      }
+        "dt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp with millisecond precision indicating when the edit occurred (UTC timezone)"
+        },
+        "type": {
+            "type": "string",
+            "enum": ["edit", "new"],
+            "description": "Type of Wikipedia action: 'new' for page creation, 'edit' for modification of existing page"
+        },
+        "user_id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Unique numeric identifier for registered Wikipedia user account. Only present for logged-in users, absent for anonymous IP edits"
+        },
+        "user_text": {
+            "type": "string",
+            "description": "Username for registered users, or IP address for anonymous users. For registered users, this is their chosen Wikipedia username. For anonymous users, this is their IPv4 or IPv6 address"
+        },
+        "user_is_bot": {
+            "type": "boolean",
+            "description": "Boolean flag indicating whether the user account has bot privileges on Wikipedia"
+        },
+        "user_edit_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total number of edits made by this user account across all Wikipedia pages. Only present for registered users, absent for anonymous IP edits"
+        },
+        "user_registration_dt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp indicating when the user account was registered on Wikipedia. Only present for registered users, absent for anonymous IP edits"
+        },
+        "page_title": {
+            "type": "string",
+            "description": "Title of the Wikipedia page being created or edited, using Wikipedia's internal format with underscores replacing spaces and URL encoding for special characters"
+        },
+        "uri": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://en\\.wikipedia\\.org/wiki/",
+            "description": "Full URL to the Wikipedia page being edited, always starting with https://en.wikipedia.org/wiki/ for English Wikipedia"
+        },
+        "comment": {
+            "type": "string",
+            "description": "Edit summary provided by the user describing the changes made. May contain Wikipedia markup, links in double brackets [[]], and automated edit summaries from tools. Optional field that may be absent for edits without comments"
+        }
     },
-    "required": ["type", "title", "timestamp"],
-    "additionalProperties": false
+    "allOf": [
+        {
+            "description": "Registered users must have user_id, user_edit_count, and user_registration_dt",
+            "if": {
+                "properties": {
+                    "user_text": {
+                        "not": {
+                            "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$|^[0-9a-fA-F:]+$"
+                        }
+                    }
+                }
+            },
+            "then": {
+                "required": ["user_id", "user_edit_count", "user_registration_dt"]
+            }
+        },
+        {
+            "description": "Anonymous IP users should not have user_id, user_edit_count, or user_registration_dt",
+            "if": {
+                "properties": {
+                    "user_text": {
+                        "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$|^[0-9a-fA-F:]+$"
+                    }
+                }
+            },
+            "then": {
+                "not": {
+                    "anyOf": [
+                        {"required": ["user_id"]},
+                        {"required": ["user_edit_count"]},
+                        {"required": ["user_registration_dt"]}
+                    ]
+                }
+            }
+        }
+    ],
+    "examples": [
+        {
+            "dt": "2025-09-01T20:48:22.829Z",
+            "type": "new",
+            "user_id": 40192293,
+            "user_text": "Sahaib",
+            "user_is_bot": false,
+            "user_edit_count": 195785,
+            "user_registration_dt": "2020-09-19T16:34:38Z",
+            "page_title": "Bishops_of_St_Asaph",
+            "uri": "https://en.wikipedia.org/wiki/Bishops_of_St_Asaph",
+            "comment": "[[WP:AES|→]]Redirected page to [[Bishop of St Asaph]]"
+        },
+        {
+            "dt": "2025-09-01T21:03:50.825Z",
+            "type": "edit",
+            "user_text": "115.99.36.145",
+            "user_is_bot": false,
+            "page_title": "Captain_Miller_(film)",
+            "uri": "https://en.wikipedia.org/wiki/Captain_Miller_(film)"
+        }
+    ]
 }
