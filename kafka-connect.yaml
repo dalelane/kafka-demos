@@ -108,7 +108,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.8
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.9
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -177,6 +177,8 @@ spec:
             group: io.debezium
             type: maven
             version: 3.3.0.Alpha2
+          - url: 'https://github.com/dalelane/kafka-connect-dropschemas-transform/releases/download/0.0.1/kafka-connect-dropschemas-transform-0.0.1.jar'
+            type: jar
       # ---------------------------------------------------------------
       # demo-set: postgresql
       # ---------------------------------------------------------------
