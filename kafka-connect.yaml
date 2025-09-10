@@ -92,7 +92,7 @@ spec:
       metadata:
         annotations:
           cloudpakId: c8b82d189e7545f0892db9ef2731b90d
-          productVersion: 12.0.0
+          productVersion: 12.0.1
           productID: 2a79e49111f44ec3acd89608e56138f5
           cloudpakName: IBM Cloud Pak for Integration
           productChargedContainers: kafka-connect-cluster-connect
@@ -108,7 +108,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.9
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.10
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -140,7 +140,7 @@ spec:
       - name: mqtt
         artifacts:
           - type: zip
-            url: 'https://github.com/lensesio/stream-reactor/releases/download/9.0.2/kafka-connect-mqtt-9.0.2.zip'
+            url: 'https://github.com/lensesio/stream-reactor/releases/download/10.0.0/kafka-connect-mqtt-10.0.0.zip'
       # ---------------------------------------------------------------
       # demo-set: mastodon
       # ---------------------------------------------------------------
@@ -176,7 +176,7 @@ spec:
           - artifact: debezium-scripting
             group: io.debezium
             type: maven
-            version: 3.3.0.Alpha2
+            version: 3.3.0.Beta1
           - url: 'https://github.com/dalelane/kafka-connect-dropschemas-transform/releases/download/0.0.1/kafka-connect-dropschemas-transform-0.0.1.jar'
             type: jar
       # ---------------------------------------------------------------
@@ -188,7 +188,7 @@ spec:
           - artifact: debezium-connector-postgres
             group: io.debezium
             type: maven
-            version: 2.7.4.Final
+            version: 3.2.2.Final
           - type: zip
             url: 'https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.13.Final/apicurio-registry-distro-connect-converter-2.6.13.Final.zip'
       # ---------------------------------------------------------------
