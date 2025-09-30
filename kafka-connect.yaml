@@ -41,6 +41,8 @@ spec:
         readOnlyRootFilesystem: true
         runAsNonRoot: true
       volumeMounts:
+        - name: cluster-ca-cert
+          mountPath: /mnt/cluster-ca-cert
         - name: connect-creds-mqtt
           mountPath: /mnt/connect-creds-mqtt
         # - name: connect-creds-mastodon
@@ -61,6 +63,9 @@ spec:
         #   mountPath: /mnt/ibmmq-schemas
     pod:
       volumes:
+        - name: cluster-ca-cert
+          secret:
+            secretName: my-kafka-cluster-cluster-ca-cert
         - name: connect-creds-mqtt
           configMap:
             name: connect-creds-mqtt
@@ -108,7 +113,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.10
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.11
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen

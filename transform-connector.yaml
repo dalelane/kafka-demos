@@ -18,15 +18,15 @@ spec:
     source.cluster.sasl.jaas.config: ${file:/opt/kafka/connect-password/kafka-connect-credentials:sasl.jaas.config}
     source.cluster.sasl.mechanism: SCRAM-SHA-512
     source.cluster.security.protocol: SASL_SSL
-    source.cluster.ssl.truststore.location: /opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert/ca.p12
-    source.cluster.ssl.truststore.password: ${file:/opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert:ca.password}
+    source.cluster.ssl.truststore.location: /mnt/cluster-ca-cert/ca.p12
+    source.cluster.ssl.truststore.password: ${file:/mnt/cluster-ca-cert:ca.password}
     source.cluster.ssl.truststore.type: PKCS12
     target.cluster.bootstrap.servers: my-kafka-cluster-kafka-bootstrap.event-automation.svc:9095
     target.cluster.sasl.jaas.config: ${file:/opt/kafka/connect-password/kafka-connect-credentials:sasl.jaas.config}
     target.cluster.sasl.mechanism: SCRAM-SHA-512
     target.cluster.security.protocol: SASL_SSL
-    target.cluster.ssl.truststore.location: /opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert/ca.p12
-    target.cluster.ssl.truststore.password: ${file:/opt/kafka/connect-certs/my-kafka-cluster-cluster-ca-cert:ca.password}
+    target.cluster.ssl.truststore.location: /mnt/cluster-ca-cert/ca.p12
+    target.cluster.ssl.truststore.password: ${file:/mnt/cluster-ca-cert:ca.password}
     target.cluster.ssl.truststore.type: PKCS12
 
     # copy keys as-is

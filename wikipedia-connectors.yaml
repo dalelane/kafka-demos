@@ -53,6 +53,7 @@ spec:
     transforms.casts.type: org.apache.kafka.connect.transforms.Cast$Value
     transforms.casts.spec: user_is_bot:boolean,user_id:int64,user_edit_count:int32
     transforms.casts.replace.null.with.default: false
+  tasksMax: 1
 ---
 apiVersion: eventstreams.ibm.com/v1beta2
 kind: KafkaConnector
@@ -106,3 +107,4 @@ spec:
     transforms.casts.type: org.apache.kafka.connect.transforms.Cast$Value
     transforms.casts.spec: user_is_bot:boolean,user_id:int64,user_edit_count:int32
     transforms.casts.replace.null.with.default: false
+  tasksMax: 1
