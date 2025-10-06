@@ -113,7 +113,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.11
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.12
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -193,7 +193,7 @@ spec:
           - artifact: debezium-connector-postgres
             group: io.debezium
             type: maven
-            version: 3.2.2.Final
+            version: 3.3.0.Final
           - type: zip
             url: 'https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.13.Final/apicurio-registry-distro-connect-converter-2.6.13.Final.zip'
       # ---------------------------------------------------------------
