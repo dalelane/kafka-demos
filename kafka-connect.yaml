@@ -97,7 +97,7 @@ spec:
       metadata:
         annotations:
           cloudpakId: c8b82d189e7545f0892db9ef2731b90d
-          productVersion: 12.0.1
+          productVersion: 12.3.0
           productID: 2a79e49111f44ec3acd89608e56138f5
           cloudpakName: IBM Cloud Pak for Integration
           productChargedContainers: kafka-connect-cluster-connect
@@ -113,7 +113,7 @@ spec:
   build:
     output:
       type: docker
-      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.12
+      image: image-registry.openshift-image-registry.svc:5000/event-automation/event-automation-demo:1.0.17
     plugins:
       # ---------------------------------------------------------------
       # demo-set : datagen
@@ -123,7 +123,7 @@ spec:
       - name: datagen
         artifacts:
           - type: jar
-            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.5.1/kafka-connect-loosehangerjeans-source-0.5.1-jar-with-dependencies.jar
+            url: https://github.com/IBM/kafka-connect-loosehangerjeans-source/releases/download/0.7.0/kafka-connect-loosehangerjeans-source-0.7.0-jar-with-dependencies.jar
           - type: zip
             url: 'https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.13.Final/apicurio-registry-distro-connect-converter-2.6.13.Final.zip'
       # ---------------------------------------------------------------
@@ -134,7 +134,7 @@ spec:
       - name: ibmmq
         artifacts:
           - type: jar
-            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.6.0/kafka-connect-mq-source-2.6.0-jar-with-dependencies.jar
+            url: https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v2.8.0/kafka-connect-mq-source-2.8.0-jar-with-dependencies.jar
           - type: jar
             url: https://github.com/ibm-messaging/kafka-connect-mq-sink/releases/download/v2.2.1/kafka-connect-mq-sink-2.2.1-jar-with-dependencies.jar
           - type: jar
@@ -193,7 +193,7 @@ spec:
           - artifact: debezium-connector-postgres
             group: io.debezium
             type: maven
-            version: 3.3.0.Final
+            version: 3.4.2.Final
           - type: zip
             url: 'https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.13.Final/apicurio-registry-distro-connect-converter-2.6.13.Final.zip'
       # ---------------------------------------------------------------
@@ -213,7 +213,7 @@ spec:
       - name: jdbc
         artifacts:
           - type: zip
-            url: https://github.com/Aiven-Open/jdbc-connector-for-apache-kafka/releases/download/v6.10.0/jdbc-connector-for-apache-kafka-6.10.0.zip
+            url: https://github.com/Aiven-Open/jdbc-connector-for-apache-kafka/releases/download/v6.12.0/jdbc-connector-for-apache-kafka-6.12.0.zip
       # ---------------------------------------------------------------
       # demo-set: Xbox
       # ---------------------------------------------------------------
@@ -236,5 +236,5 @@ spec:
       # "Bike sharing" data generator - generates random events based on a Kaggle dataset
       - artifacts:
           - type: jar
-            url: 'https://github.com/dalelane/kafka-connect-bikesharing-source/releases/download/0.0.8/kafka-connect-bikesharing-source-0.0.8-jar-with-dependencies.jar'
+            url: 'https://github.com/dalelane/kafka-connect-bikesharing-source/releases/download/0.0.9/kafka-connect-bikesharing-source-0.0.9-jar-with-dependencies.jar'
         name: bikesharing

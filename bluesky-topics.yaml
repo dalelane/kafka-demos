@@ -18,6 +18,8 @@ spec:
     retention.bytes: '50000000'
     # 3 months
     retention.ms: '7889400000'
+    # ignore connector timestamps
+    message.timestamp.type: LogAppendTime
 
 ---
 # ---------------------------------------------------------------
@@ -40,3 +42,5 @@ spec:
     retention.bytes: '50000000'
     # 3 months
     retention.ms: '7889400000'
+    # ignore connector timestamps
+    message.timestamp.type: LogAppendTime
